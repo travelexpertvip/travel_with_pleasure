@@ -7,5 +7,18 @@
   "hotel_stars": [4, 5],
   "meal_plans": ["AI", "UAI", "BB", "HB"],
   "budget_eur_for_two": { "AI": 6000, "UAI": 6000, "BB": 4000, "HB": 4000 },
-  "output_directory": "docs/.vitepress/content/tour-drafts"
+  "output_directory": "docs/.vitepress/content/tours",
+  "destinations": {
+    "maldives": ["мальдив", "maldives"],
+    "thailand": ["таиланд", "тайланд", "thailand"],
+    "vietnam": ["вьетнам", "vietnam"],
+    "uae": ["оаэ", "emirates", "dubai", "дубай"],
+    "seychelles": ["сейшел", "seychelles"],
+    "zanzibar": ["занзибар", "zanzibar"],
+    "mauritius": ["маврикий", "mauritius"],
+    "indonesia": ["индонез", "бали", "indonesia", "bali"],
+    "cuba": ["куба", "cuba"],
+    "dominican-republic": ["доминикан", "dominican"],
+    "mexico": ["мексик", "mexico"]
+  }
 }
