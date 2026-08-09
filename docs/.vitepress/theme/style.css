@@ -1,0 +1,170 @@
+ :root{--vp-c-brand-1:#55e1d2;--vp-c-bg:#071622;--vp-c-bg-alt:#0d2232;--vp-c-bg-soft:#102c40;--vp-c-text-1:#effbff;--vp-c-text-2:#a9c3cf;--vp-c-divider:#284c5e}.VPContent{min-height:100vh;background:radial-gradient(circle at 10% -10%,#164461 0,transparent 30%),radial-gradient(circle at 90% 0,#183b69 0,transparent 28%),#071622}.VPNav{background:#071622df!important;backdrop-filter:blur(12px)}.VPDoc .container,.VPDoc .content,.VPDoc .content-container{max-width:none}.VPDoc .content-container{margin:0}.VPDoc{padding:0}.travel{max-width:1280px;margin:auto;padding:48px 28px 56px;color:#effbff;font-family:Inter,system-ui,sans-serif}.travel *{box-sizing:border-box}.eyebrow,.region{color:#55e1d2;letter-spacing:.12em;font-size:.72rem;font-weight:800;text-transform:uppercase}.hero{max-width:850px}.hero.short{padding-bottom:10px}.hero h1{font-size:clamp(2.4rem,5.5vw,4.7rem);line-height:1.02;margin:10px 0 14px;letter-spacing:-.04em}.hero h1 em{color:#55e1d2;font-style:normal}.hero p{color:#a9c3cf;font-size:1.04rem;line-height:1.6}.filters{display:grid;grid-template-columns:1.35fr repeat(3,.55fr);gap:10px;margin:28px 0;padding:14px;background:#0d2232dc;border:1px solid #284c5e;border-radius:20px}.filters.one{grid-template-columns:1fr;max-width:610px}input,select{width:100%;min-width:0;background:#0a1b29;color:#effbff;border:1px solid #284c5e;border-radius:12px;padding:12px;font:inherit}.months{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin:26px 0}.months button{min-height:82px;background:linear-gradient(145deg,#14384e,#0a1c2a);border:1px solid #284c5e;border-radius:16px;color:#effbff;padding:11px;text-align:left;cursor:pointer}.months button.active{background:linear-gradient(145deg,#167371,#10465d);border-color:#55e1d2}.months small{display:block;color:#a9c3cf;margin-top:7px}.summary{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:25px 0 14px}.summary h2{margin:0;font-size:1.5rem}.summary p{margin:6px 0;color:#a9c3cf}.summary b{color:#55e1d2}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{appearance:none;width:100%;border:1px solid #284c5e;border-radius:18px;background:linear-gradient(160deg,#123044,#091e2d);padding:18px;color:#effbff;text-align:left;cursor:pointer}.card:hover{border-color:#5caeff;transform:translateY(-3px)}.card h3{font-size:1.15rem;margin:8px 0}.airport{color:#a9c3cf;min-height:38px;font-size:.88rem}.badges{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.badge{font-size:.74rem;padding:5px 8px;background:#fff1;border-radius:99px}.visa{color:#ffe2a9;background:#ffcb6618}.dive{color:#b8d9ff;background:#5caeff20}.budget{color:#a8fff6;background:#55e1d220}.desc{border-top:1px solid #284c5e;padding-top:12px;color:#c4dae4;font-size:.87rem;line-height:1.48}.empty{grid-column:1/-1;padding:50px;text-align:center;border:1px dashed #284c5e;border-radius:18px;color:#a9c3cf}.back{position:fixed;inset:0;z-index:99;display:flex;align-items:center;justify-content:center;padding:20px;background:#030a10bf;backdrop-filter:blur(3px)}.modal{max-width:560px;width:100%;max-height:86vh;overflow:auto;position:relative;background:linear-gradient(160deg,#123044,#0a1f2f);border:1px solid #284c5e;border-radius:22px;padding:26px}.close{position:absolute;right:15px;top:14px;width:34px;height:34px;border-radius:50%;border:1px solid #284c5e;background:#fff1;color:white;font-size:1.2rem;cursor:pointer}.modal h2{margin:7px 35px 3px 0}.modal h4{color:#5caeff;font-size:.82rem;text-transform:uppercase;margin:18px 0 8px}.modal ul{margin:0;padding-left:19px;color:#d6edf5;line-height:1.65}.price{font-size:1.25rem;font-weight:800;color:#ffcf70;margin:12px 0}.noborder{border:0;padding:0}.note,.airlines{color:#a9c3cf;line-height:1.5}.table{overflow:auto;border:1px solid #284c5e;border-radius:17px}.table table{width:100%;min-width:800px;border-collapse:collapse}.table th,.table td{padding:13px;border-bottom:1px solid #284c5e;text-align:left;font-size:.87rem}.table th{color:#55e1d2;background:#0d2838}.table td{color:#c4dae4}.flight .price{color:#55e1d2}@media(max-width:850px){.filters{grid-template-columns:1fr 1fr}.filters input{grid-column:1/-1}.months{grid-template-columns:repeat(4,1fr)}.cards{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.travel{padding:30px 16px 42px}.filters{grid-template-columns:1fr}.months{grid-template-columns:repeat(3,1fr);gap:7px}.months button{min-height:68px;padding:9px;font-size:.82rem}.months small{font-size:.65rem}.cards{grid-template-columns:1fr}.summary{flex-direction:column;align-items:flex-start;gap:5px}.modal{padding:20px}}.tour-card {
+  margin-top: 12px;
+  padding: 18px;
+  border: 1px solid rgba(85, 225, 210, 0.28);
+  border-radius: 16px;
+  background: rgba(7, 22, 34, 0.55);
+}
+
+.tour-card strong {
+  display: block;
+  padding-right: 12px;
+  color: #effbff;
+  font-size: 1.05rem;
+}
+
+.tour-card p {
+  margin: 8px 0;
+  color: #c4dae4;
+  line-height: 1.45;
+}
+
+.tour-card .price {
+  color: #ffcf70;
+  font-size: 1.2rem;
+}
+
+.tour-card small {
+  display: block;
+  color: #a9c3cf;
+  line-height: 1.4;
+}
+
+.tour-card a {
+  display: inline-flex;
+  margin-top: 8px;
+  padding: 8px 12px;
+  border: 1px solid rgba(85, 225, 210, 0.4);
+  border-radius: 10px;
+  color: #55e1d2;
+  text-decoration: none;
+}
+
+.tour-card a:hover {
+  background: rgba(85, 225, 210, 0.12);
+  border-color: #55e1d2;
+}/* Убираем узкую колонку документа VitePress */
+.VPDoc .container,
+.VPDoc .content,
+.VPDoc .content-container,
+.VPDoc.has-aside .content-container {
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Календарь использует широкую область экрана */
+.travel {
+  width: min(1280px, calc(100vw - 56px)) !important;
+  max-width: none !important;
+  margin: 0 auto !important;
+  padding: 48px 0 56px !important;
+}
+
+/* Делаем верхний блок шире */
+.hero {
+  max-width: 1080px !important;
+}
+
+/* Главная: меньше отступ от шапки до eyebrow */
+.hero:not(.short) {
+  margin-top: -24px;
+}
+
+/* Фильтры занимают доступную ширину */
+.filters {
+  width: 100% !important;
+}
+
+/* На телефоне сохраняем безопасные отступы */
+@media (max-width: 560px) {
+  .travel {
+    width: calc(100vw - 32px) !important;
+    padding: 30px 0 42px !important;
+  }
+
+  .hero:not(.short) {
+    margin-top: -15px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 14vw, 4.2rem) !important;
+  }
+}
+.card {
+  position: relative;
+}
+
+.tour-corner {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid rgba(101, 225, 214, 0.45);
+  border-radius: 50%;
+  background: rgba(26, 152, 166, 0.22);
+  color: #67e4dc;
+  font-size: 18px;
+  line-height: 1;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+}
+.tour-select {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  padding: 11px 14px;
+  border: 1px solid #55e1d2;
+  border-radius: 11px;
+  background: transparent;
+  color: #55e1d2;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tour-select:hover,
+.tour-select.selected {
+  background: #55e1d2;
+  color: #071622;
+}
+.selection-button {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 80;
+  padding: 13px 18px;
+  border: 0;
+  border-radius: 14px;
+  background: #55e1d2;
+  color: #071622;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.selection-remove {
+  margin-top: 12px;
+  padding: 8px 11px;
+  border: 1px solid #ff8e8e;
+  border-radius: 9px;
+  background: transparent;
+  color: #ffb0b0;
+  cursor: pointer;
+}
+.selection-share {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 11px;
+  background: #55e1d2;
+  color: #071622;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}

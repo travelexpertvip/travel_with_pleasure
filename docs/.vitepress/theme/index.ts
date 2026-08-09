@@ -1,0 +1,1 @@
+import DefaultTheme from'vitepress/theme';import'./style.css';import TravelCalendar from'./TravelCalendar.vue';import Directory from'./Directory.vue';import Flights from'./Flights.vue';export default{extends:DefaultTheme,enhanceApp({app}){app.component('TravelCalendar',TravelCalendar);app.component('Directory',Directory);app.component('Flights',Flights)}}

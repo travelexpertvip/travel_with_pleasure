@@ -1,0 +1,1090 @@
+{
+  "months": [
+    "Январь",
+    "Февраль",
+    "Март",
+    "Апрель",
+    "Май",
+    "Июнь",
+    "Июль",
+    "Август",
+    "Сентябрь",
+    "Октябрь",
+    "Ноябрь",
+    "Декабрь"
+  ],
+  "visaLabels": {
+    "Б": {
+      "short": "без визы",
+      "long": "Без визы"
+    },
+    "П": {
+      "short": "по прибытии",
+      "long": "По прибытии"
+    }
+  },
+  "divingOptions": [
+    "Развитая",
+    "Есть",
+    "Ограниченная"
+  ],
+  "ui": {
+    "calendar": {
+      "searchPlaceholder": "Поиск: Мальдивы, Египет, Карибы…",
+      "regionAll": "Все регионы",
+      "visaAll": "Любой въезд",
+      "visaNo": "Без визы",
+      "visaOnArrival": "По прибытии / разрешение",
+      "divingAll": "Любой дайвинг",
+      "divingDeveloped": "PADI: развитая",
+      "divingAvailable": "PADI: есть",
+      "divingLimited": "PADI: ограниченная",
+      "monthCountSuffix": "направлений",
+      "summaryTitle": "— куда ехать",
+      "summarySubtitle": "Пик или устойчивая часть пляжного сезона",
+      "summaryCount": "из",
+      "summaryCountSuffix": "направлений",
+      "badgeVisaPrefix": "Въезд:",
+      "badgeDivingPrefix": "PADI:",
+      "emptyState": "Ничего не найдено.",
+      "modalFlightsTitle": "Как обычно летают",
+      "modalFeaturesTitle": "Особенности",
+      "modalNote": "Маршруты и цены ориентировочные. Перед покупкой проверяйте тариф и транзит.",
+      "visaDisclaimer": "Условия зависят от срока, цели поездки, маршрута и могут меняться. Перед бронированием необходимо проверять требования.",
+      "airportPrefix": "✈"
+    },
+    "directory": {
+      "visaDisclaimer": "Условия зависят от срока, цели поездки, маршрута и могут меняться. Перед бронированием необходимо проверять требования.",
+      "searchPlaceholder": "Найти страну, остров, аэропорт…",
+      "tableHeaders": {
+        "destination": "Направление",
+        "region": "Регион",
+        "visa": "Въезд",
+        "airport": "Аэропорт",
+        "diving": "PADI",
+        "season": "Сезон"
+      }
+    },
+    "flights": {
+      "priceDisclaimer": "Не live-тариф: проверяйте цену перед покупкой."
+    }
+  },
+  "destinations": [
+    {
+      "id": "maldives",
+      "name": "Мальдивы",
+      "region": "Индийский океан",
+      "airport": "Мале · MLE",
+      "visa": "П",
+      "diving": "Развитая",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Атоллы, рифы, резорты и локальные острова; август–ноябрь особенно интересны для мант.",
+      "flights": [
+        "Turkish Airlines через Стамбул",
+        "Emirates / flydubai через Дубай",
+        "Qatar Airways через Доху"
+      ],
+      "budget": "🟠 дорого",
+      "priceFrom": "от $900"
+    },
+    {
+      "id": "seychelles",
+      "name": "Сейшелы",
+      "region": "Индийский океан",
+      "airport": "Маэ · SEZ",
+      "visa": "П",
+      "diving": "Развитая",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        9,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Маэ, Праслин, Ла-Диг; самые спокойные окна — апрель–май и октябрь–ноябрь.",
+      "flights": [
+        "Qatar Airways через Доху",
+        "Emirates через Дубай",
+        "Turkish Airlines через Стамбул"
+      ],
+      "budget": "🟠 дорого",
+      "priceFrom": "от $950"
+    },
+    {
+      "id": "mauritius",
+      "name": "Маврикий",
+      "region": "Индийский океан",
+      "airport": "MRU",
+      "visa": "П",
+      "diving": "Развитая",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        9,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Лагуны, горы, рэки и кайтсерфинг; учитывайте циклонный риск в январе–марте.",
+      "flights": [
+        "Emirates через Дубай",
+        "Qatar Airways через Доху",
+        "Turkish Airlines через Стамбул"
+      ],
+      "budget": "🟠 дорого",
+      "priceFrom": "от $1 000"
+    },
+    {
+      "id": "zanzibar",
+      "name": "Занзибар, Танзания",
+      "region": "Индийский океан",
+      "airport": "Занзибар · ZNZ",
+      "visa": "П",
+      "diving": "Развитая",
+      "season": [
+        0,
+        1,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11
+      ],
+      "temperature": null,
+      "description": "Mnemba Atoll, специи и белые пляжи; север удобнее при приливах.",
+      "flights": [
+        "Qatar Airways через Доху",
+        "Turkish Airlines через Стамбул"
+      ],
+      "budget": "🟡 средне",
+      "priceFrom": "от $700"
+    },
+    {
+      "id": "madagascar",
+      "name": "Мадагаскар · Nosy Be",
+      "region": "Индийский океан",
+      "airport": "Nosy Be · NOS",
+      "visa": "П",
+      "diving": "Есть",
+      "season": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Природа, лемуры, рифы; сентябрь–декабрь — сезон китовых акул.",
+      "flights": [
+        "Turkish Airlines + Ethiopian Airlines",
+        "Через региональные хабы"
+      ],
+      "budget": "🔴 неудобная логистика",
+      "priceFrom": "от $1 100"
+    },
+    {
+      "id": "comoros",
+      "name": "Коморы",
+      "region": "Индийский океан",
+      "airport": "Морони · HAH",
+      "visa": "П",
+      "diving": "Ограниченная",
+      "season": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "temperature": null,
+      "description": "Вулканические острова, черепахи и почти нет массового туризма.",
+      "flights": [
+        "Turkish Airlines + Ethiopian Airlines"
+      ],
+      "budget": "🔴 неудобная логистика",
+      "priceFrom": "от $1 200"
+    },
+    {
+      "id": "oman",
+      "name": "Оман · Маскат и Дайманият",
+      "region": "Ближний Восток",
+      "airport": "Маскат · MCT",
+      "visa": "П",
+      "diving": "Развитая",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        9,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Рифы, черепахи, рэки; сильный выбор для осенне-зимнего дайвинга.",
+      "flights": [
+        "Qatar Airways через Доху",
+        "flydubai через Дубай",
+        "Turkish Airlines через Стамбул"
+      ],
+      "budget": "🟡 средне",
+      "priceFrom": "от $600"
+    },
+    {
+      "id": "uae",
+      "name": "ОАЭ · Фуджейра",
+      "region": "Ближний Восток",
+      "airport": "Дубай · DXB / Фуджейра · FJR",
+      "visa": "Б",
+      "diving": "Развитая",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        9,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Индийский океан, черепахи и высокий уровень сервиса.",
+      "flights": [
+        "Belavia до Дубая",
+        "flydubai через Дубай"
+      ],
+      "budget": "🟡 средне",
+      "priceFrom": "от $400"
+    },
+    {
+      "id": "egypt",
+      "name": "Египет · Красное море",
+      "region": "Ближний Восток",
+      "airport": "Хургада · HRG / Шарм · SSH / Марса-Алам · RMF",
+      "visa": "П",
+      "diving": "Развитая",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        8,
+        9,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Рифы, дайв-сафари, Дахаб и Марса-Алам; особенно комфортно весной и осенью.",
+      "flights": [
+        "Belavia и чартеры из Минска",
+        "Через Москву"
+      ],
+      "budget": "🟢 бюджетно",
+      "priceFrom": "от $350"
+    },
+    {
+      "id": "jordan",
+      "name": "Иордания · Акаба",
+      "region": "Ближний Восток",
+      "airport": "Акаба · AQJ",
+      "visa": "П",
+      "diving": "Есть",
+      "season": [
+        1,
+        2,
+        3,
+        4,
+        8,
+        9,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Красное море плюс Петра и Вади-Рам; меньше туристов, чем в Египте.",
+      "flights": [
+        "Turkish Airlines через Стамбул",
+        "flydubai через Дубай"
+      ],
+      "budget": "🟡 средне",
+      "priceFrom": "от $650"
+    },
+    {
+      "id": "qatar",
+      "name": "Катар · Доха",
+      "region": "Ближний Восток",
+      "airport": "Доха · DOH",
+      "visa": "П",
+      "diving": "Есть",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        9,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Городской отдых, пустыня и пляжи; летом экстремально жарко.",
+      "flights": [
+        "Qatar Airways",
+        "Turkish Airlines через Стамбул"
+      ],
+      "budget": "🟡 средне",
+      "priceFrom": "от $550"
+    },
+    {
+      "id": "turkey",
+      "name": "Турция · Анталья и Каш",
+      "region": "Средиземноморье",
+      "airport": "Анталья · AYT / Даламан · DLM",
+      "visa": "Б",
+      "diving": "Развитая",
+      "season": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "temperature": null,
+      "description": "Пляжи, история и дайвинг в Каше; бархатный сезон — сентябрь–октябрь.",
+      "flights": [
+        "Belavia / чартеры из Минска",
+        "Turkish Airlines через Стамбул"
+      ],
+      "budget": "🟢 бюджетно",
+      "priceFrom": "от $250"
+    },
+    {
+      "id": "montenegro",
+      "name": "Черногория",
+      "region": "Средиземноморье",
+      "airport": "Тиват · TIV",
+      "visa": "Б",
+      "diving": "Есть",
+      "season": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "temperature": null,
+      "description": "Адриатика, Боко-Которский залив, горы и старые города.",
+      "flights": [
+        "Turkish Airlines через Стамбул",
+        "Air Serbia через Белград"
+      ],
+      "budget": "🟡 средне",
+      "priceFrom": "от $400"
+    },
+    {
+      "id": "albania",
+      "name": "Албания",
+      "region": "Средиземноморье",
+      "airport": "Тирана · TIA",
+      "visa": "Б",
+      "diving": "Есть",
+      "season": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "temperature": null,
+      "description": "Ионическое море, Саранда и Ксамиль; сочетание цен и прозрачной воды.",
+      "flights": [
+        "Turkish Airlines через Стамбул"
+      ],
+      "budget": "🟡 средне",
+      "priceFrom": "от $450"
+    },
+    {
+      "id": "tunisia",
+      "name": "Тунис",
+      "region": "Средиземноморье",
+      "airport": "Энфида · NBE / Монастир · MIR",
+      "visa": "Б",
+      "diving": "Есть",
+      "season": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "temperature": null,
+      "description": "Пляжи, талассотерапия, Сахара; наиболее тёплое море в июле–сентябре.",
+      "flights": [
+        "Через Стамбул",
+        "Через Москву"
+      ],
+      "budget": "🟡 средне",
+      "priceFrom": "от $450"
+    },
+    {
+      "id": "georgia",
+      "name": "Грузия · Батуми",
+      "region": "Средиземноморье",
+      "airport": "Батуми · BUS / Кутаиси · KUT",
+      "visa": "Б",
+      "diving": "Ограниченная",
+      "season": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "temperature": null,
+      "description": "Море, горы и гастрономия; дайвинг не является главной причиной поездки.",
+      "flights": [
+        "Belavia",
+        "Georgian Airways"
+      ],
+      "budget": "🟢 бюджетно",
+      "priceFrom": "от $200"
+    },
+    {
+      "id": "bali",
+      "name": "Бали и Нуса-Пенида",
+      "region": "Юго-Восточная Азия",
+      "airport": "Денпасар · DPS",
+      "visa": "П",
+      "diving": "Развитая",
+      "season": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "temperature": null,
+      "description": "Манты, мола-мола, вулканы; сухой сезон и лучшее окно для маршрута.",
+      "flights": [
+        "Turkish Airlines через Стамбул",
+        "Qatar Airways через Доху",
+        "Emirates через Дубай"
+      ],
+      "budget": "🟠 дорого",
+      "priceFrom": "от $750"
+    },
+    {
+      "id": "komodo",
+      "name": "Комодо и Флорес",
+      "region": "Юго-Восточная Азия",
+      "airport": "Лабуан-Баджо · LBJ",
+      "visa": "П",
+      "diving": "Развитая",
+      "season": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "temperature": null,
+      "description": "Драконы Комодо, манты и дайв-сафари.",
+      "flights": [
+        "Через Бали + внутренний рейс",
+        "Singapore Airlines + региональные"
+      ],
+      "budget": "🔴 неудобная логистика",
+      "priceFrom": "от $950"
+    },
+    {
+      "id": "phuket",
+      "name": "Таиланд · Пхукет и Краби",
+      "region": "Юго-Восточная Азия",
+      "airport": "Пхукет · HKT / Краби · KBV",
+      "visa": "П",
+      "diving": "Развитая",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Андаманское море, Симиланы, Пхи-Пхи; основной сезон — ноябрь–апрель.",
+      "flights": [
+        "Turkish Airlines через Стамбул",
+        "Qatar Airways через Доху",
+        "Через Москву"
+      ],
+      "budget": "🟡 средне",
+      "priceFrom": "от $600"
+    },
+    {
+      "id": "samui",
+      "name": "Таиланд · Самуи и Тао",
+      "region": "Юго-Восточная Азия",
+      "airport": "Самуи · USM",
+      "visa": "П",
+      "diving": "Развитая",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "temperature": null,
+      "description": "Сиамский залив с другим сезоном; много школ PADI и курсов.",
+      "flights": [
+        "Через Бангкок + Bangkok Airways",
+        "Через Самуи и паром"
+      ],
+      "budget": "🟠 дорого",
+      "priceFrom": "от $700"
+    },
+    {
+      "id": "phuquoc",
+      "name": "Вьетнам · Фукуок",
+      "region": "Юго-Восточная Азия",
+      "airport": "Фукуок · PQC",
+      "visa": "Б",
+      "diving": "Есть",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        9,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Тёплая вода, An Thoi, спокойный отдых и доступное обучение.",
+      "flights": [
+        "Turkish Airlines через Стамбул",
+        "Через Хошимин + внутренний рейс"
+      ],
+      "budget": "🟡 средне",
+      "priceFrom": "от $600"
+    },
+    {
+      "id": "vietnam",
+      "name": "Вьетнам · Нячанг и Дананг",
+      "region": "Юго-Восточная Азия",
+      "airport": "Камрань · CXR / Дананг · DAD",
+      "visa": "Б",
+      "diving": "Есть",
+      "season": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "temperature": null,
+      "description": "Городские пляжи, кухня и экскурсии; Дананг хорош весной и летом.",
+      "flights": [
+        "Через Москву",
+        "Turkish Airlines через Стамбул"
+      ],
+      "budget": "🟡 средне",
+      "priceFrom": "от $500"
+    },
+    {
+      "id": "srilanka-west",
+      "name": "Шри-Ланка · юго-запад",
+      "region": "Юго-Восточная Азия",
+      "airport": "Коломбо · CMB",
+      "visa": "П",
+      "diving": "Есть",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Унаватуна, Мирисса, Хиккадува; серфинг, киты, сафари.",
+      "flights": [
+        "Emirates через Дубай",
+        "Qatar Airways через Доху"
+      ],
+      "budget": "🟡 средне",
+      "priceFrom": "от $550"
+    },
+    {
+      "id": "srilanka-east",
+      "name": "Шри-Ланка · восток",
+      "region": "Юго-Восточная Азия",
+      "airport": "Коломбо · CMB",
+      "visa": "П",
+      "diving": "Есть",
+      "season": [
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "temperature": null,
+      "description": "Тринкомали и Нилавели — альтернатива юго-западу в европейское лето.",
+      "flights": [
+        "Emirates через Дубай",
+        "Qatar Airways через Доху"
+      ],
+      "budget": "🟡 средне",
+      "priceFrom": "от $550"
+    },
+    {
+      "id": "malaysia-west",
+      "name": "Малайзия · Лангкави и Пенанг",
+      "region": "Юго-Восточная Азия",
+      "airport": "Лангкави · LGK / Пенанг · PEN",
+      "visa": "Б",
+      "diving": "Есть",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Комфортная инфраструктура, кухня и островные маршруты.",
+      "flights": [
+        "Через Куала-Лумпур"
+      ],
+      "budget": "🟠 дорого",
+      "priceFrom": "от $700"
+    },
+    {
+      "id": "malaysia-sabah",
+      "name": "Малайзия · Сабах и Сипадан",
+      "region": "Юго-Восточная Азия",
+      "airport": "Кота-Кинабалу · BKI",
+      "visa": "Б",
+      "diving": "Развитая",
+      "season": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "temperature": null,
+      "description": "Черепахи, барракуды и Сипадан; разрешения на погружения лимитированы.",
+      "flights": [
+        "Через Куала-Лумпур + региональный рейс"
+      ],
+      "budget": "🟠 дорого",
+      "priceFrom": "от $850"
+    },
+    {
+      "id": "cambodia",
+      "name": "Камбоджа · Сиануквиль",
+      "region": "Юго-Восточная Азия",
+      "airport": "Сиануквиль · KOS",
+      "visa": "П",
+      "diving": "Есть",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Бюджетный отдых и выезды на Ко-Ронг.",
+      "flights": [
+        "Через Москву/Азию"
+      ],
+      "budget": "🟡 средне",
+      "priceFrom": "от $650"
+    },
+    {
+      "id": "cuba",
+      "name": "Куба",
+      "region": "Карибы",
+      "airport": "Гавана · HAV / Варадеро · VRA",
+      "visa": "Б",
+      "diving": "Развитая",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Варадеро, Гавана, рифы и Jardines de la Reina для дайв-сафари.",
+      "flights": [
+        "Через Москву",
+        "Belavia + партнёры"
+      ],
+      "budget": "🟠 дорого",
+      "priceFrom": "от $700"
+    },
+    {
+      "id": "dominicana",
+      "name": "Доминиканская Республика",
+      "region": "Карибы",
+      "airport": "Пунта-Кана · PUJ",
+      "visa": "П",
+      "diving": "Развитая",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "All-inclusive, Саона, Bayahibe и лёгкий дайвинг.",
+      "flights": [
+        "Через Москву",
+        "Turkish Airlines через Стамбул"
+      ],
+      "budget": "🟠 дорого",
+      "priceFrom": "от $650"
+    },
+    {
+      "id": "barbados",
+      "name": "Барбадос",
+      "region": "Карибы",
+      "airport": "Бриджтаун · BGI",
+      "visa": "Б",
+      "diving": "Развитая",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Серфинг, рэки и англоязычный островной сервис.",
+      "flights": [
+        "Turkish Airlines + British Airways",
+        "Через европейский хаб"
+      ],
+      "budget": "🔴 неудобная логистика",
+      "priceFrom": "от $1 100"
+    },
+    {
+      "id": "antilles",
+      "name": "Малые Антильские острова",
+      "region": "Карибы",
+      "airport": "ANU / GND / SKB / SVD",
+      "visa": "Б",
+      "diving": "Есть",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Антигуа, Гренада, Доминика, Сент-Китс, Сент-Винсент; яхтинг и бухты.",
+      "flights": [
+        "Через европейский/американский хаб"
+      ],
+      "budget": "🔴 неудобная логистика",
+      "priceFrom": "от $1 300"
+    },
+    {
+      "id": "jamaica",
+      "name": "Ямайка",
+      "region": "Карибы",
+      "airport": "Монтего-Бей · MBJ",
+      "visa": "П",
+      "diving": "Развитая",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Водопады, музыка, all-inclusive и Карибское море.",
+      "flights": [
+        "Через европейский/американский хаб"
+      ],
+      "budget": "🟠 дорого",
+      "priceFrom": "от $1 000"
+    },
+    {
+      "id": "belize",
+      "name": "Белиз",
+      "region": "Карибы",
+      "airport": "Белиз-Сити · BZE",
+      "visa": "П",
+      "diving": "Развитая",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Барьерный риф и Blue Hole; направление прежде всего для дайверов.",
+      "flights": [
+        "Через Стамбул + американский хаб"
+      ],
+      "budget": "🔴 неудобная логистика",
+      "priceFrom": "от $1 400"
+    },
+    {
+      "id": "panama",
+      "name": "Панама",
+      "region": "Центральная Америка",
+      "airport": "Панама · PTY",
+      "visa": "Б",
+      "diving": "Есть",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Два океана, Бокас-дель-Торо и Сан-Блас.",
+      "flights": [
+        "Turkish Airlines через Стамбул"
+      ],
+      "budget": "🔴 неудобная логистика",
+      "priceFrom": "от $1 100"
+    },
+    {
+      "id": "brazil",
+      "name": "Бразилия · северо-восток",
+      "region": "Южная Америка",
+      "airport": "Салвадор · SSA / Ресифи · REC",
+      "visa": "Б",
+      "diving": "Развитая",
+      "season": [
+        0,
+        1,
+        2,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Пляжи, города, серфинг; сезон различается по побережью.",
+      "flights": [
+        "Turkish Airlines + региональный рейс"
+      ],
+      "budget": "🔴 неудобная логистика",
+      "priceFrom": "от $1 200"
+    },
+    {
+      "id": "fiji",
+      "name": "Фиджи",
+      "region": "Океания",
+      "airport": "Нади · NAN",
+      "visa": "Б",
+      "diving": "Развитая",
+      "season": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "temperature": null,
+      "description": "Мягкие кораллы, акулы и островные резорты.",
+      "flights": [
+        "Через Дубай/Азию",
+        "Fiji Airways"
+      ],
+      "budget": "🔴 неудобная логистика",
+      "priceFrom": "от $1 500"
+    },
+    {
+      "id": "vanuatu",
+      "name": "Вануату",
+      "region": "Океания",
+      "airport": "Порт-Вила · VLI",
+      "visa": "Б",
+      "diving": "Развитая",
+      "season": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "temperature": null,
+      "description": "Рэк SS President Coolidge, вулканы и сильный дайвинг.",
+      "flights": [
+        "Через Австралию/Новую Каледонию"
+      ],
+      "budget": "🔴 неудобная логистика",
+      "priceFrom": "от $1 700"
+    },
+    {
+      "id": "samoa",
+      "name": "Самоа",
+      "region": "Океания",
+      "airport": "Апиа · APW",
+      "visa": "Б",
+      "diving": "Есть",
+      "season": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "temperature": null,
+      "description": "Водопады, полинезийская культура и неторопливый формат.",
+      "flights": [
+        "Через Австралию/Новую Зеландию"
+      ],
+      "budget": "🔴 неудобная логистика",
+      "priceFrom": "от $1 700"
+    },
+    {
+      "id": "tonga",
+      "name": "Тонга",
+      "region": "Океания",
+      "airport": "Тонгатапу · TBU",
+      "visa": "П",
+      "diving": "Есть",
+      "season": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "temperature": null,
+      "description": "Июль–октябрь — сезон горбатых китов.",
+      "flights": [
+        "Через Австралию/Новую Зеландию"
+      ],
+      "budget": "🔴 неудобная логистика",
+      "priceFrom": "от $1 800"
+    },
+    {
+      "id": "palau",
+      "name": "Палау",
+      "region": "Океания",
+      "airport": "Корор · ROR",
+      "visa": "П",
+      "diving": "Развитая",
+      "season": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        10,
+        11
+      ],
+      "temperature": null,
+      "description": "Blue Corner, Jellyfish Lake и дайвинг мирового уровня.",
+      "flights": [
+        "Через Стамбул и азиатский хаб"
+      ],
+      "budget": "🔴 неудобная логистика",
+      "priceFrom": "от $1 400"
+    },
+    {
+      "id": "cook",
+      "name": "Острова Кука",
+      "region": "Океания",
+      "airport": "Раротонга · RAR",
+      "visa": "Б",
+      "diving": "Есть",
+      "season": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "temperature": null,
+      "description": "Лагуны Раротонги и Аитутаки; спокойный островной отдых.",
+      "flights": [
+        "Air New Zealand + региональные рейсы"
+      ],
+      "budget": "🔴 неудобная логистика",
+      "priceFrom": "от $1 600"
+    }
+  ]
+}
