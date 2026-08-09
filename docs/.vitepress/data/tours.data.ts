@@ -4,7 +4,9 @@ export type Tour = {
   id: string
   offer_group_id: string
   destination_id: string
-  status: 'draft' | 'active'
+  status: 'draft' | 'active' | 'archived'
+  offer_type?: 'standard' | 'special'
+  special_offer_valid_until?: string
   hotel: string
   hotel_url?: string
   stars: number

@@ -26,16 +26,73 @@ const region = ref('all')
 const visa = ref<'all' | VisaCode>('all')
 const diving = ref<'all' | DivingLevel>('all')
 const selected = ref<Destination | null>(null)
+const selectedTourMonth = ref<number | null>(null)
+const showArchive = ref(false)
+const archiveDestination = ref('all')
+
+const localToday = () => {
+  const today = new Date()
+  const year = today.getFullYear()
+  const month = String(today.getMonth() + 1).padStart(2, '0')
+  const day = String(today.getDate()).padStart(2, '0')
+
+  return `${year}-${month}-${day}`
+}
+
+const isExpiredSpecialOffer = (tour: typeof tours[number]) =>
+  tour.offer_type === 'special' &&
+  Boolean(tour.special_offer_valid_until) &&
+  tour.special_offer_valid_until! < localToday()
+
 const activeTours = computed(() =>
-  tours.filter(tour => tour.status === 'active')
+  tours.filter(
+    tour =>
+      tour.status === 'active' &&
+      !isExpiredSpecialOffer(tour)
+  )
+)
+
+const archivedTours = computed(() =>
+  tours.filter(
+    tour =>
+      tour.status === 'archived' ||
+      isExpiredSpecialOffer(tour)
+  )
+)
+
+const filteredArchivedTours = computed(() =>
+  archivedTours.value.filter(
+    tour =>
+      archiveDestination.value === 'all' ||
+      tour.destination_id === archiveDestination.value
+  )
 )
 
 const tourCount = (destinationId: string) =>
   activeTours.value.filter(tour => tour.destination_id === destinationId).length
 
+const openDestination = (
+  destination: Destination,
+  month: number | null = null
+) => {
+  selected.value = destination
+  selectedTourMonth.value = month
+  showSelection.value = false
+  showArchive.value = false
+}
+
 const selectedTours = computed(() =>
   selected.value
-    ? activeTours.value.filter(tour => tour.destination_id === selected.value?.id)
+    ? activeTours.value.filter(tour => {
+        const isSelectedDestination =
+          tour.destination_id === selected.value?.id
+
+        const isSelectedMonth =
+          selectedTourMonth.value === null ||
+          Number(tour.departure_date.slice(5, 7)) - 1 === selectedTourMonth.value
+
+        return isSelectedDestination && isSelectedMonth
+      })
     : []
 )
 
@@ -172,7 +229,12 @@ const rows = computed(() =>
     </section>
 
     <section class="cards">
-      <button v-for="x in rows" :key="x.id" class="card" @click="selected = x">
+      <button
+  v-for="x in rows"
+  :key="x.id"
+  class="card"
+  @click="openDestination(x, current)"
+>
       <span
   v-if="tourCount(x.id)"
   class="tour-corner"
@@ -209,7 +271,59 @@ const rows = computed(() =>
 >
   <article class="modal">
     <button class="close" @click="showSelection = false">×</button>
+<div
+  v-if="showArchive"
+  class="back"
+  @click.self="showArchive = false"
+>
+  <article class="modal">
+    <button class="close" @click="showArchive = false">×</button>
 
+    <span class="region">Неактуальные предложения</span>
+    <h2>Архив туров</h2>
+
+    <select v-model="archiveDestination">
+      <option value="all">Все страны</option>
+      <option
+        v-for="destination in destinations"
+        :key="destination.id"
+        :value="destination.id"
+      >
+        {{ destination.name }}
+      </option>
+    </select>
+
+    <article
+      v-for="tour in filteredArchivedTours"
+      :key="tour.id"
+      class="tour-card"
+    >
+      <strong>{{ tour.hotel }} · {{ tour.stars }}★</strong>
+
+      <p v-if="tour.offer_type === 'special'" class="tour-special">
+        СПО завершилось:
+        {{ tour.special_offer_valid_until }}
+      </p>
+
+      <p>{{ tour.nights }} ночей · {{ tour.meal_plan }}</p>
+
+      <p>
+        ✈ {{ tour.departure_city }} ·
+        {{ tour.departure_date }} — {{ tour.return_date }}
+      </p>
+
+      <p>{{ tour.flight }}</p>
+
+      <p class="price">
+        от {{ tour.price.toLocaleString('ru-RU') }} {{ tour.currency }}
+      </p>
+    </article>
+
+    <p v-if="!filteredArchivedTours.length" class="note">
+      В архиве нет туров по выбранной стране.
+    </p>
+  </article>
+</div>
     <span class="region">Выбранные предложения</span>
     <h2>Моя подборка</h2>
 
@@ -219,6 +333,10 @@ const rows = computed(() =>
       class="tour-card"
     >
       <strong>{{ tour.hotel }} · {{ tour.stars }}★</strong>
+      <p v-if="tour.offer_type === 'special'" class="tour-special">
+  СПЕЦПРЕДЛОЖЕНИЕ · действительно до
+  {{ tour.special_offer_valid_until }}
+</p>
       <p>{{ tour.nights }} ночей · {{ tour.meal_plan }}</p>
 
       <p>
@@ -248,7 +366,13 @@ const rows = computed(() =>
 >
   Поделиться подборкой
 </button>
-
+<button
+  type="button"
+  class="archive-button"
+  @click="showArchive = true"
+>
+  Архив туров ({{ archivedTours.length }})
+</button>
 <p v-if="shareStatus" class="note">
   {{ shareStatus }}
 </p>
