@@ -1,0 +1,11 @@
+{
+  "channels": ["LTCB2B", "toursmsk", "rosting", "Anywaytravelminsk"],
+  "passport_country": "BY",
+  "departure_cities": ["Minsk", "Moscow", "Istanbul"],
+  "excluded_countries": ["Egypt", "Turkey", "Bulgaria"],
+  "nights": { "min": 5, "max": 10 },
+  "hotel_stars": [4, 5],
+  "meal_plans": ["AI", "UAI", "BB", "HB"],
+  "budget_eur_for_two": { "AI": 6000, "UAI": 6000, "BB": 4000, "HB": 4000 },
+  "output_directory": "docs/.vitepress/content/tour-drafts"
+}
