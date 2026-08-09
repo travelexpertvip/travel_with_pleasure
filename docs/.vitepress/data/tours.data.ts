@@ -18,6 +18,7 @@ export type Tour = {
   flight: string
   price: number
   currency: string
+  price_for?: 'per_person' | 'per_two' | 'per_room' | 'unknown'
   price_note: string
   published_at: string
   tour_source_url?: string
@@ -30,5 +31,5 @@ export { data }
 export default createContentLoader('.vitepress/content/tours/*.md', {
   transform(rawData) {
     return rawData.map(page => page.frontmatter as Tour)
-  }
+  },
 })
