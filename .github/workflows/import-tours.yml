@@ -18,10 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
@@ -32,7 +32,7 @@ jobs:
         run: python scripts/import_tours.py
 
       - name: Create or update review pull request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: bot/public-tour-drafts
@@ -40,8 +40,7 @@ jobs:
           commit-message: 'chore: collect public tour drafts'
           title: 'chore: review new public tour drafts'
           body: |
-            Автоматически собранные черновики из публичных Telegram-каналов.
+            Автоматически собранные карточки отелей из публичных Telegram-каналов.
 
-            Перед merge проверьте визу, страну, даты, отель, питание, цену и источник.
-            Для публикации перенесите подтверждённые карточки из `docs/.vitepress/content/tour-drafts/` в `docs/.vitepress/content/tours/`.
+            Перед публикацией проверьте визу, страну, даты, отель, питание, цену и источник, затем измените `status: draft` на `status: active` у готовых карточек.
           draft: true
