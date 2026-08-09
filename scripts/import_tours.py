@@ -15,7 +15,8 @@ CONFIG_PATH = ROOT / 'config' / 'tour_sources.json'
 CITY_KEYWORDS = {'Minsk': ('минск', 'minsk'), 'Moscow': ('москва', 'moscow', 'мск'), 'Istanbul': ('стамбул', 'istanbul')}
 EXCLUDED_KEYWORDS = {'Egypt': ('египет', 'egypt'), 'Turkey': ('турция', 'turkey'), 'Bulgaria': ('болгария', 'bulgaria')}
 MEAL_PATTERNS = {'UAI': r'ultra\s+all|ультра\s+все', 'AI': r'\ball\b|все\s+включено', 'HB': r'\bhb\b|полупансион', 'BB': r'\bbb\b|завтрак'}
-OFFER_PATTERN = re.compile(r'(?P<hotel>.+?)\s+(?P<stars>[45])\s*\*\s*(?P<meal>UAI|AI|ALL|HB|BB|RO)?\s*[-–—]\s*(?P<price>[\d\s]+)\s*(?P<currency>USD|EUR|BYN|RUB|\$|€|Br)?\b', re.I)
+OFFER_PATTERN = re.compile(r'(?P<hotel>.+?)\s+(?P<stars>[45])\s*\*\s*(?P<meal>UAI|AI|ALL|HB|BB|RO)?\s*[-–—]\s*(?P<price>[\d\s]+)\s*(?P<currency>USD|EUR|BYN|RUB|\$|€|Br)?\s*$', re.I)
+PRICE_LINE = re.compile(r'^\s*[\d\s]+\s*(?:USD|EUR|BYN|RUB|\$|€|Br)\s*$', re.I)
 
 
 def load_config() -> dict:
@@ -24,6 +25,20 @@ def load_config() -> dict:
 
 def yaml_value(value: object) -> str:
     return json.dumps(value, ensure_ascii=False)
+
+
+def normalize_offer_lines(text: str) -> list[str]:
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    normalized, index = [], 0
+    while index < len(lines):
+        current = lines[index]
+        if re.search(r'[45]\s*\*.*[-–—]\s*$', current) and index + 1 < len(lines) and PRICE_LINE.match(lines[index + 1]):
+            normalized.append(f'{current} {lines[index + 1]}')
+            index += 2
+        else:
+            normalized.append(current)
+            index += 1
+    return normalized
 
 
 def find_departure_city(text: str, allowed: list[str]) -> str | None:
@@ -38,9 +53,7 @@ def find_nights(text: str) -> int | None:
 
 def find_date(text: str) -> datetime | None:
     match = re.search(r'\b(\d{1,2})\.(\d{1,2})\.(\d{4})\b', text)
-    if not match:
-        return None
-    return datetime(int(match.group(3)), int(match.group(2)), int(match.group(1)))
+    return datetime(int(match.group(3)), int(match.group(2)), int(match.group(1))) if match else None
 
 
 def find_destination(text: str, destinations: dict[str, list[str]]) -> str | None:
@@ -49,10 +62,7 @@ def find_destination(text: str, destinations: dict[str, list[str]]) -> str | Non
 
 
 def find_meal_plan(text: str) -> str | None:
-    for meal_plan, pattern in MEAL_PATTERNS.items():
-        if re.search(pattern, text, re.I):
-            return meal_plan
-    return None
+    return next((meal for meal, pattern in MEAL_PATTERNS.items() if re.search(pattern, text, re.I)), None)
 
 
 def is_excluded(text: str, excluded: list[str]) -> bool:
@@ -97,31 +107,23 @@ def fetch_posts(channel: str) -> list[dict]:
 
 def extract_offers(post: dict, config: dict) -> list[dict]:
     text = post['text']
-    city = find_departure_city(text, config['departure_cities'])
-    nights = find_nights(text)
-    departure = find_date(text)
-    destination = find_destination(text, config['destinations'])
-    common_meal = find_meal_plan(text)
+    city, nights, departure = find_departure_city(text, config['departure_cities']), find_nights(text), find_date(text)
+    destination, common_meal = find_destination(text, config['destinations']), find_meal_plan(text)
     if not all((city, nights, departure, destination, common_meal)) or is_excluded(text, config['excluded_countries']):
         return []
     if not config['nights']['min'] <= nights <= config['nights']['max']:
         return []
     valid_until = parse_valid_until(text)
     price_for = 'per_room' if re.search(r'цен[аы]\s+за\s+(?:номер|dbl)', text, re.I) else 'unknown'
-    group = f"{post['channel'].lower()}-{post['post_id']}"
-    offers = []
-    for index, line in enumerate(text.splitlines(), start=1):
-        match = OFFER_PATTERN.search(line.strip())
+    group, offers = f"{post['channel'].lower()}-{post['post_id']}", []
+    for index, line in enumerate(normalize_offer_lines(text), start=1):
+        match = OFFER_PATTERN.search(line)
         if not match:
             continue
-        stars = int(match.group('stars'))
-        if stars not in config['hotel_stars']:
+        stars, meal = int(match.group('stars')), normalize_meal(match.group('meal'), common_meal)
+        if stars not in config['hotel_stars'] or meal not in config['meal_plans']:
             continue
-        price = int(re.sub(r'\s+', '', match.group('price')))
-        meal = normalize_meal(match.group('meal'), common_meal)
-        if meal not in config['meal_plans']:
-            continue
-        offers.append({'id': f'{group}-{index}', 'offer_group_id': group, 'destination_id': destination, 'hotel': match.group('hotel').strip(' -–—▫️'), 'stars': stars, 'meal_plan': meal, 'nights': nights, 'departure_city': city, 'departure_date': departure.date().isoformat(), 'return_date': (departure + timedelta(days=nights)).date().isoformat(), 'price': price, 'currency': normalize_currency(match.group('currency')), 'price_for': price_for, 'offer_type': 'special' if valid_until else 'standard', 'special_offer_valid_until': valid_until, 'post': post})
+        offers.append({'id': f'{group}-{index}', 'offer_group_id': group, 'destination_id': destination, 'hotel': match.group('hotel').strip(' -–—▫️'), 'stars': stars, 'meal_plan': meal, 'nights': nights, 'departure_city': city, 'departure_date': departure.date().isoformat(), 'return_date': (departure + timedelta(days=nights)).date().isoformat(), 'price': int(re.sub(r'\s+', '', match.group('price'))), 'currency': normalize_currency(match.group('currency')), 'price_for': price_for, 'offer_type': 'special' if valid_until else 'standard', 'special_offer_valid_until': valid_until, 'post': post})
     return offers
 
 
@@ -131,8 +133,7 @@ def write_offer(offer: dict, config: dict) -> Path:
     post = offer['post']
     filename = output_dir / f"{offer['id']}.md"
     raw_hash = hashlib.sha256(post['text'].encode('utf-8')).hexdigest()[:12]
-    lines = [
-        '---', f"id: {yaml_value(offer['id'])}", f"offer_group_id: {yaml_value(offer['offer_group_id'])}", f"destination_id: {yaml_value(offer['destination_id'])}", 'status: draft', f"offer_type: {offer['offer_type']}", f"hotel: {yaml_value(offer['hotel'])}", f"stars: {offer['stars']}", f"meal_plan: {offer['meal_plan']}", f"nights: {offer['nights']}", f"departure_city: {offer['departure_city']}", f"departure_date: {offer['departure_date']}", f"return_date: {offer['return_date']}", 'flight: Не указан', f"price: {offer['price']}", f"currency: {offer['currency']}", f"price_for: {offer['price_for']}", 'price_note: Требуется проверка цены и состава пакета', f"published_at: {post['published_at']}", f"tour_source_url: {post['url']}", f"price_checked_at: {datetime.now(timezone.utc).isoformat()}", f"source_channel: @{post['channel']}", 'passport_country: BY', 'visa_check: manual_review_required', f"source_content_hash: {raw_hash}"]
+    lines = ['---', f"id: {yaml_value(offer['id'])}", f"offer_group_id: {yaml_value(offer['offer_group_id'])}", f"destination_id: {yaml_value(offer['destination_id'])}", 'status: draft', f"offer_type: {offer['offer_type']}", f"hotel: {yaml_value(offer['hotel'])}", f"stars: {offer['stars']}", f"meal_plan: {offer['meal_plan']}", f"nights: {offer['nights']}", f"departure_city: {offer['departure_city']}", f"departure_date: {offer['departure_date']}", f"return_date: {offer['return_date']}", 'flight: Не указан', f"price: {offer['price']}", f"currency: {offer['currency']}", f"price_for: {offer['price_for']}", 'price_note: Требуется проверка цены и состава пакета', f"published_at: {post['published_at']}", f"tour_source_url: {post['url']}", f"price_checked_at: {datetime.now(timezone.utc).isoformat()}", f"source_channel: @{post['channel']}", 'passport_country: BY', 'visa_check: manual_review_required', f"source_content_hash: {raw_hash}"]
     if offer['special_offer_valid_until']:
         lines.append(f"special_offer_valid_until: {offer['special_offer_valid_until']}")
     lines.extend(['---', '', '## Исходное предложение', '', post['text'], '', '## Проверка перед публикацией', '', '- [ ] Подтвердить безвизовый въезд для паспорта Беларуси', '- [ ] Проверить цену за двоих и условия пакета', '- [ ] Сменить `status: draft` на `status: active` для публикации'])
@@ -144,8 +145,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument('--max-posts-per-channel', type=int, default=30)
     args = parser.parse_args()
-    config = load_config()
-    written = []
+    config, written = load_config(), []
     for channel in config['channels']:
         try:
             posts = fetch_posts(channel)[:args.max_posts_per_channel]
@@ -153,8 +153,7 @@ def main() -> int:
             print(f'WARNING: @{channel}: {error}')
             continue
         for post in posts:
-            for offer in extract_offers(post, config):
-                written.append(write_offer(offer, config))
+            written.extend(write_offer(offer, config) for offer in extract_offers(post, config))
     print(f'Created or updated {len(written)} hotel offer drafts')
     return 0
 
