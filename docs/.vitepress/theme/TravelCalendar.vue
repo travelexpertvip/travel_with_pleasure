@@ -227,35 +227,45 @@ const rows = computed(() =>
       </div>
       <b>{{ rows.length }} {{ labels.summaryCount }} {{ destinations.length }} {{ labels.summaryCountSuffix }}</b>
     </section>
+<section class="cards">
+  <button
+    v-for="x in rows"
+    :key="x.id"
+    class="card"
+    @click="openDestination(x)"
+  >
+    <span
+      v-if="tourCount(x.id)"
+      class="tour-corner"
+      title="Есть готовые туры"
+      aria-label="Есть готовые туры"
+    >
+      ✈
+    </span>
 
-    <section class="cards">
-      <button
-  v-for="x in rows"
-  :key="x.id"
-  class="card"
-  @click="openDestination(x, current)"
->
-      <span
-  v-if="tourCount(x.id)"
-  class="tour-corner"
-  title="Есть готовые туры"
-  aria-label="Есть готовые туры"
->
-  ✈
-</span>
-        <span class="region">{{ x.region }}</span>
-        <h3>{{ x.name }}</h3>
-        <p class="airport">{{ labels.airportPrefix }} {{ x.airport }}</p>
-        <div class="badges">
-          <span class="badge visa">{{ labels.badgeVisaPrefix }} {{ visaLabel(x.visa) }}</span>
-          <span class="badge dive">{{ labels.badgeDivingPrefix }} {{ x.diving }}</span>
-          <span class="badge budget">{{ x.budget }}</span>
-        </div>
-        <p class="desc">{{ x.description }}</p>
-      </button>
-      <div v-if="!rows.length" class="empty">{{ labels.emptyState }}</div>
-    </section>
-  </main>
+    <span class="region">{{ x.region }}</span>
+    <h3>{{ x.name }}</h3>
+    <p class="airport">{{ labels.airportPrefix }} {{ x.airport }}</p>
+
+    <div class="badges">
+      <span class="badge visa">
+        {{ labels.badgeVisaPrefix }} {{ visaLabel(x.visa) }}
+      </span>
+      <span class="badge dive">
+        {{ labels.badgeDivingPrefix }} {{ x.diving }}
+      </span>
+      <span class="badge budget">{{ x.budget }}</span>
+    </div>
+
+    <p class="desc">{{ x.description }}</p>
+  </button>
+
+  <div v-if="!rows.length" class="empty">
+    {{ labels.emptyState }}
+  </div>
+</section>
+</main>
+
 <button
   v-if="selectedTourIds.length"
   type="button"
@@ -264,6 +274,15 @@ const rows = computed(() =>
 >
   Моя подборка ({{ selectedTourIds.length }})
 </button>
+
+<button
+  type="button"
+  class="archive-button"
+  @click="showArchive = true"
+>
+  Архив туров ({{ archivedTours.length }})
+</button>
+
 <div
   v-if="showSelection"
   class="back"
@@ -271,59 +290,7 @@ const rows = computed(() =>
 >
   <article class="modal">
     <button class="close" @click="showSelection = false">×</button>
-<div
-  v-if="showArchive"
-  class="back"
-  @click.self="showArchive = false"
->
-  <article class="modal">
-    <button class="close" @click="showArchive = false">×</button>
 
-    <span class="region">Неактуальные предложения</span>
-    <h2>Архив туров</h2>
-
-    <select v-model="archiveDestination">
-      <option value="all">Все страны</option>
-      <option
-        v-for="destination in destinations"
-        :key="destination.id"
-        :value="destination.id"
-      >
-        {{ destination.name }}
-      </option>
-    </select>
-
-    <article
-      v-for="tour in filteredArchivedTours"
-      :key="tour.id"
-      class="tour-card"
-    >
-      <strong>{{ tour.hotel }} · {{ tour.stars }}★</strong>
-
-      <p v-if="tour.offer_type === 'special'" class="tour-special">
-        СПО завершилось:
-        {{ tour.special_offer_valid_until }}
-      </p>
-
-      <p>{{ tour.nights }} ночей · {{ tour.meal_plan }}</p>
-
-      <p>
-        ✈ {{ tour.departure_city }} ·
-        {{ tour.departure_date }} — {{ tour.return_date }}
-      </p>
-
-      <p>{{ tour.flight }}</p>
-
-      <p class="price">
-        от {{ tour.price.toLocaleString('ru-RU') }} {{ tour.currency }}
-      </p>
-    </article>
-
-    <p v-if="!filteredArchivedTours.length" class="note">
-      В архиве нет туров по выбранной стране.
-    </p>
-  </article>
-</div>
     <span class="region">Выбранные предложения</span>
     <h2>Моя подборка</h2>
 
@@ -333,10 +300,12 @@ const rows = computed(() =>
       class="tour-card"
     >
       <strong>{{ tour.hotel }} · {{ tour.stars }}★</strong>
+
       <p v-if="tour.offer_type === 'special'" class="tour-special">
-  СПЕЦПРЕДЛОЖЕНИЕ · действительно до
-  {{ tour.special_offer_valid_until }}
-</p>
+        СПЕЦПРЕДЛОЖЕНИЕ · действительно до
+        {{ tour.special_offer_valid_until }}
+      </p>
+
       <p>{{ tour.nights }} ночей · {{ tour.meal_plan }}</p>
 
       <p>
@@ -358,118 +327,197 @@ const rows = computed(() =>
         Удалить из подборки
       </button>
     </article>
-<button
-  v-if="myTours.length"
-  type="button"
-  class="selection-share"
-  @click="shareSelection"
->
-  Поделиться подборкой
-</button>
-<button
-  type="button"
-  class="archive-button"
-  @click="showArchive = true"
->
-  Архив туров ({{ archivedTours.length }})
-</button>
-<p v-if="shareStatus" class="note">
-  {{ shareStatus }}
-</p>
+
+    <button
+      v-if="myTours.length"
+      type="button"
+      class="selection-share"
+      @click="shareSelection"
+    >
+      Поделиться подборкой
+    </button>
+
+    <p v-if="shareStatus" class="note">
+      {{ shareStatus }}
+    </p>
   </article>
 </div>
-  <div v-if="selected" class="back" @click.self="selected = null">
-    <article class="modal">
-      <button class="close" @click="selected = null">×</button>
-      <span class="region">{{ selected.region }}</span>
-      <h2>{{ selected.name }}</h2>
-      <p class="airport">{{ labels.airportPrefix }} {{ selected.airport }}</p>
-      <p v-if="selected.temperature" class="airport">
-  Температура: {{ selected.temperature }}
-</p>
-      <div class="badges">
-        <span class="badge visa">{{ labels.badgeVisaPrefix }} {{ visaLabel(selected.visa) }}</span>
-        <span class="badge dive">{{ labels.badgeDivingPrefix }} {{ selected.diving }}</span>
-      </div>
-      <p class="price">{{ selected.budget }} · {{ selected.priceFrom }}</p>
-      <p v-if="selected.visa_note" class="note">
-  <span
-    v-if="selected.verification_status === 'unverified'"
-    title="Требуется проверка условий въезда"
-    aria-label="Требуется проверка условий въезда"
-    style="color: #f4b63a; margin-right: 6px;"
-  >
-    ⚠
-  </span>
-  {{ selected.visa_note }}
-</p>
-<p v-if="selected.visa_checked_at" class="note">
-  Проверено: {{ selected.visa_checked_at }}
-</p>
 
-<a
-  v-if="selected.visa_source_url"
-  :href="selected.visa_source_url"
-  target="_blank"
-  rel="noreferrer"
-  class="note"
+<div
+  v-if="showArchive"
+  class="back"
+  @click.self="showArchive = false"
 >
-  Официальный источник условий въезда ↗
-</a>
-      <h4>{{ labels.modalFlightsTitle }}</h4>
-<ul>
-  <li v-for="f in selected.flights" :key="f">{{ f }}</li>
-</ul>
-<section v-if="selectedTours.length">
-  <h4>Туры с перелётом</h4>
+  <article class="modal">
+    <button class="close" @click="showArchive = false">×</button>
 
-  <article
-    v-for="tour in selectedTours"
-    :key="tour.id"
-    class="tour-card"
-  >
-    <strong>{{ tour.hotel }} · {{ tour.stars }}★</strong>
+    <span class="region">Неактуальные предложения</span>
+    <h2>Архив туров</h2>
 
-    <p>{{ tour.nights }} ночей · {{ tour.meal_plan }}</p>
+    <select v-model="archiveDestination">
+      <option value="all">Все страны</option>
 
-    <p>
-      ✈ {{ tour.departure_city }} ·
-      {{ tour.departure_date }} — {{ tour.return_date }}
+      <option
+        v-for="destination in destinations"
+        :key="destination.id"
+        :value="destination.id"
+      >
+        {{ destination.name }}
+      </option>
+    </select>
+
+    <article
+      v-for="tour in filteredArchivedTours"
+      :key="tour.id"
+      class="tour-card"
+    >
+      <strong>{{ tour.hotel }} · {{ tour.stars }}★</strong>
+
+      <p v-if="tour.offer_type === 'special'" class="tour-special">
+        СПО завершилось: {{ tour.special_offer_valid_until }}
+      </p>
+
+      <p>{{ tour.nights }} ночей · {{ tour.meal_plan }}</p>
+
+      <p>
+        ✈ {{ tour.departure_city }} ·
+        {{ tour.departure_date }} — {{ tour.return_date }}
+      </p>
+
+      <p>{{ tour.flight }}</p>
+
+      <p class="price">
+        от {{ tour.price.toLocaleString('ru-RU') }} {{ tour.currency }}
+      </p>
+    </article>
+
+    <p v-if="!filteredArchivedTours.length" class="note">
+      В архиве нет туров по выбранной стране.
+    </p>
+  </article>
+</div>
+
+<div
+  v-if="selected"
+  class="back"
+  @click.self="selected = null"
+>
+  <article class="modal">
+    <button class="close" @click="selected = null">×</button>
+
+    <span class="region">{{ selected.region }}</span>
+    <h2>{{ selected.name }}</h2>
+
+    <p class="airport">
+      {{ labels.airportPrefix }} {{ selected.airport }}
     </p>
 
-    <p>{{ tour.flight }}</p>
+    <p v-if="selected.temperature" class="airport">
+      Температура: {{ selected.temperature }}
+    </p>
+
+    <div class="badges">
+      <span class="badge visa">
+        {{ labels.badgeVisaPrefix }} {{ visaLabel(selected.visa) }}
+      </span>
+      <span class="badge dive">
+        {{ labels.badgeDivingPrefix }} {{ selected.diving }}
+      </span>
+    </div>
 
     <p class="price">
-      от {{ tour.price.toLocaleString('ru-RU') }} {{ tour.currency }}
+      {{ selected.budget }} · {{ selected.priceFrom }}
     </p>
 
-    <small>{{ tour.price_note }}</small>
-
-    <p v-if="tour.hotel_url">
-      <a
-        :href="tour.hotel_url"
-        target="_blank"
-        rel="noreferrer"
+    <p v-if="selected.visa_note" class="note">
+      <span
+        v-if="selected.verification_status === 'unverified'"
+        title="Требуется проверка условий въезда"
+        aria-label="Требуется проверка условий въезда"
+        style="color: #f4b63a; margin-right: 6px;"
       >
-        Об отеле ↗
-      </a>
+        ⚠
+      </span>
+      {{ selected.visa_note }}
     </p>
-<button
-  type="button"
-  class="tour-select"
-  :class="{ selected: isTourSelected(tour.id) }"
-  @click="toggleTour(tour.id)"
->
-  {{ isTourSelected(tour.id) ? '✓ В моей подборке' : '+ В мою подборку' }}
-</button>
-<p v-if="shareStatus" class="note">
-  {{ shareStatus }}
-</p>
+
+    <p v-if="selected.visa_checked_at" class="note">
+      Проверено: {{ selected.visa_checked_at }}
+    </p>
+
+    <a
+      v-if="selected.visa_source_url"
+      :href="selected.visa_source_url"
+      target="_blank"
+      rel="noreferrer"
+      class="note"
+    >
+      Официальный источник условий въезда ↗
+    </a>
+
+    <h4>{{ labels.modalFlightsTitle }}</h4>
+
+    <ul>
+      <li v-for="f in selected.flights" :key="f">
+        {{ f }}
+      </li>
+    </ul>
+
+    <section v-if="selectedTours.length">
+      <h4>Туры с перелётом</h4>
+
+      <article
+        v-for="tour in selectedTours"
+        :key="tour.id"
+        class="tour-card"
+      >
+        <strong>{{ tour.hotel }} · {{ tour.stars }}★</strong>
+
+        <p v-if="tour.offer_type === 'special'" class="tour-special">
+          СПЕЦПРЕДЛОЖЕНИЕ · действительно до
+          {{ tour.special_offer_valid_until }}
+        </p>
+
+        <p>{{ tour.nights }} ночей · {{ tour.meal_plan }}</p>
+
+        <p>
+          ✈ {{ tour.departure_city }} ·
+          {{ tour.departure_date }} — {{ tour.return_date }}
+        </p>
+
+        <p>{{ tour.flight }}</p>
+
+        <p class="price">
+          от {{ tour.price.toLocaleString('ru-RU') }} {{ tour.currency }}
+        </p>
+
+        <small>{{ tour.price_note }}</small>
+
+        <p v-if="tour.hotel_url">
+          <a
+            :href="tour.hotel_url"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Об отеле ↗
+          </a>
+        </p>
+
+        <button
+          type="button"
+          class="tour-select"
+          :class="{ selected: isTourSelected(tour.id) }"
+          @click="toggleTour(tour.id)"
+        >
+          {{ isTourSelected(tour.id) ? '✓ В моей подборке' : '+ В мою подборку' }}
+        </button>
+      </article>
+    </section>
+
+    <h4>{{ labels.modalFeaturesTitle }}</h4>
+    <p class="desc noborder">{{ selected.description }}</p>
+    <p class="note">{{ labels.modalNote }}</p>
   </article>
-</section>
-<h4>{{ labels.modalFeaturesTitle }}</h4>
-<p class="desc noborder">{{ selected.description }}</p>
-<p class="note">{{ labels.modalNote }}</p>
-</article>
 </div>
 </template>
+    
