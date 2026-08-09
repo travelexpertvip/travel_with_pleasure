@@ -30,6 +30,8 @@ export { data }
 
 export default createContentLoader('.vitepress/content/tours/*.md', {
   transform(rawData) {
-    return rawData.map(page => page.frontmatter as Tour)
+    return rawData
+      .map(page => page.frontmatter as Tour)
+      .filter(tour => tour.status === 'active')
   },
 })
