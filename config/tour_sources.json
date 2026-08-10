@@ -1,7 +1,7 @@
 {
   "channels": ["LTCB2B", "toursmsk", "rosting", "Anywaytravelminsk"],
   "passport_country": "BY",
-  "departure_cities": ["Minsk", "Moscow", "Istanbul", "Warsaw", "Vilnius", "Kaunas", "Riga"],
+  "departure_cities": ["Minsk", "Moscow", "Istanbul", "Warsaw", "Vilnius", "Kaunas","Riga"],
   "excluded_countries": ["Egypt", "Turkey", "Bulgaria"],
   "nights": { "min": 5, "max": 10 },
   "hotel_stars": [4, 5],
