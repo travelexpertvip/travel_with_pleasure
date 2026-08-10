@@ -270,4 +270,8 @@
 .flight {
   white-space: pre-line;
 }
+ .tour-flight {
+  white-space: pre-line;
+  line-height: 1.55;
+}
 }
