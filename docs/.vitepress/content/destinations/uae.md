@@ -1,6 +1,6 @@
 ---
 id: "uae"
-name: "ОАЭ · Фуджейра"
+name: "ОАЭ · Фуджейра · Рас-эль-Хайм"
 region: "Ближний Восток"
 airport: "Дубай · DXB / Фуджейра · FJR"
 visa: "Б"
@@ -11,7 +11,7 @@ description: "Индийский океан, черепахи и высокий 
 flights: ["Belavia до Дубая", "flydubai через Дубай"]
 budget: "🟡 средне"
 priceFrom: "от $400"
-verification_status: "unverified"
+verification_status: "verified"
 visa_note: "Эмират Фуджейра; не вся страна"
 visa_checked_at: ""
 visa_source_url: ""
