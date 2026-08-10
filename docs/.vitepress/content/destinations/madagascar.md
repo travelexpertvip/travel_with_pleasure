@@ -5,7 +5,7 @@ region: "Индийский океан"
 airport: "Nosy Be · NOS"
 visa: "П"
 diving: "Есть"
-season: [4, 5, 6, 7, 8, 9]
+season: [3, 4, 5, 6, 7, 8, 9]
 temperature: +28...+32 °C
 description: "мало дождей, спокойное море и отличные условия для пляжного отдыха, дайвинга и экскурсий"
 flights: ["TK, EK, EY из Москвы"]
