@@ -21,7 +21,7 @@ flight: |-
 price: 4999
 currency: "EUR"
 price_for: "на двоих"
-price_note: "индивидуальный трансфер"
+price_note: "Стоимость на 2 взр"
 published_at: "2026-08-10T07:17:05+00:00"
 tour_source_url: "manual"
 price_checked_at: "2026-08-10T14:57:50.624818+00:00"
