@@ -1,7 +1,7 @@
 {
   "channels": ["LTCB2B", "toursmsk", "rosting", "Anywaytravelminsk"],
   "passport_country": "BY",
-  "departure_cities": ["Minsk", "Moscow", "Warsaw", "Vilnius", "Kaunas", "Riga"],
+  "departure_cities": ["Minsk", "Moscow", "Istanbul", "Warsaw", "Vilnius", "Kaunas", "Riga"],
   "excluded_countries": ["Egypt", "Turkey", "Bulgaria"],
   "nights": { "min": 5, "max": 10 },
   "hotel_stars": [4, 5],
@@ -12,7 +12,7 @@
     "maldives": ["мальдив", "maldives"],
     "thailand": ["таиланд", "тайланд", "thailand"],
     "vietnam": ["вьетнам", "vietnam"],
-    "uae": ["оаэ", "emirates", "dubai", "дубай"],
+    "uae": ["оаэ", "emirates", "dubai", "дубай", "рас-эль-хайма", "рас эль хайма", "ras al khaimah", "ras-al-khaimah"],
     "seychelles": ["сейшел", "seychelles"],
     "zanzibar": ["занзибар", "zanzibar"],
     "mauritius": ["маврикий", "mauritius"],
