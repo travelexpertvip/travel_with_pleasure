@@ -21,11 +21,13 @@ const isExpiredSpecialOffer = (tour: typeof tours[number]) =>
   tour.special_offer_valid_until! < localToday()
 
 const activeTours = computed(() =>
-  tours.filter(
-    tour =>
-      tour.status === 'active' &&
-      !isExpiredSpecialOffer(tour)
-  )
+  tours
+    .filter(
+      tour =>
+        tour.status === 'active' &&
+        !isExpiredSpecialOffer(tour)
+    )
+    .sort((a, b) => a.price - b.price)
 )
 
 const tourMonth = (value: unknown) => {
@@ -43,13 +45,9 @@ const tourMonth = (value: unknown) => {
 }
 
 const currentMonthTours = computed(() =>
-  activeTours.value
-    .filter(tour => tourMonth(tour.departure_date) === current.value)
-    .sort((a, b) =>
-      String(a.departure_date).localeCompare(
-        String(b.departure_date)
-      )
-    )
+  activeTours.value.filter(
+    tour => tourMonth(tour.departure_date) === current.value
+  )
 )
 const selectedTourIds = ref<string[]>([])
 const showSelection = ref(false)
@@ -93,11 +91,13 @@ const myTours = computed(() =>
 )
 
 const archivedTours = computed(() =>
-  tours.filter(
-    tour =>
-      tour.status === 'archived' ||
-      isExpiredSpecialOffer(tour)
-  )
+  tours
+    .filter(
+      tour =>
+        tour.status === 'archived' ||
+        isExpiredSpecialOffer(tour)
+    )
+    .sort((a, b) => a.price - b.price)
 )
 
 const filteredArchivedTours = computed(() =>
