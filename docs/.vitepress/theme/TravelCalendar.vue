@@ -69,7 +69,10 @@ const filteredArchivedTours = computed(() =>
 )
 
 const tourCount = (destinationId: string) =>
-  activeTours.value.filter(tour => tour.destination_id === destinationId).length
+  activeTours.value.filter(tour =>
+    tour.destination_id === destinationId &&
+    Number(tour.departure_date.slice(5, 7)) - 1 === current.value
+  ).length
 
 const openDestination = (
   destination: Destination,
@@ -232,7 +235,7 @@ const rows = computed(() =>
     v-for="x in rows"
     :key="x.id"
     class="card"
-    @click="openDestination(x)"
+   @click="openDestination(x, current)"
   >
     <span
       v-if="tourCount(x.id)"
