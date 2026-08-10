@@ -18,6 +18,10 @@ CITY_KEYWORDS = {
     'Minsk': ('минск', 'minsk'),
     'Moscow': ('москва', 'moscow', 'мск'),
     'Istanbul': ('стамбул', 'istanbul'),
+    'Warsaw': ('варшвава', 'warsaw'),
+    'Vilnius': ('вильнюс', 'vilnius'),
+    'Kaunas': ('каунас', 'kaunas'),
+    'Riga': ('рига', 'riga'),
 }
 EXCLUDED_KEYWORDS = {
     'Egypt': ('египет', 'egypt'),
