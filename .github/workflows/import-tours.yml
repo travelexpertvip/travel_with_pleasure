@@ -31,6 +31,38 @@ jobs:
       - name: Collect public Telegram posts
         run: python scripts/import_tours.py
 
+      - name: Preserve reviewed cards and label new drafts
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import subprocess
+
+          tours = Path('docs/.vitepress/content/tours')
+          changed = subprocess.run(
+              ['git', 'diff', '--name-only'],
+              check=True, text=True, capture_output=True
+          ).stdout.splitlines()
+          for name in changed:
+              path = Path(name)
+              if not str(path).startswith(str(tours)) or path.suffix != '.md':
+                  continue
+              base = subprocess.run(
+                  ['git', 'show', f'HEAD:{name}'], text=True, capture_output=True
+              )
+              if base.returncode == 0 and re.search(
+                  r'(?m)^(?:status:\s*active|review_status:\s*approved)\s*$',
+                  base.stdout,
+              ):
+                  subprocess.run(['git', 'restore', '--source=HEAD', '--', name], check=True)
+                  print(f'Preserved reviewed card: {name}')
+                  continue
+              text = path.read_text(encoding='utf-8')
+              if not re.search(r'(?m)^review_status:', text):
+                  text = re.sub(r'(?m)^(status:\s*draft\s*)$', r'\1\nreview_status: pending', text, count=1)
+                  path.write_text(text, encoding='utf-8')
+          PY
+
       - name: Create or update review pull request
         uses: peter-evans/create-pull-request@v8
         with:
@@ -42,5 +74,6 @@ jobs:
           body: |
             Автоматически собранные карточки отелей из публичных Telegram-каналов.
 
-            Перед публикацией проверьте визу, страну, даты, отель, питание, цену и источник, затем измените `status: draft` на `status: active` у готовых карточек.
+            Активные или одобренные карточки не изменяются импортом. Новые черновики помечены `review_status: pending`.
+            После проверки смените `status: draft` на `status: active`, добавьте `review_status: approved` и `reviewed_at: YYYY-MM-DD`.
           draft: true
