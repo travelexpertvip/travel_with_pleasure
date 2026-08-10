@@ -2,7 +2,7 @@
 id: "zanzibar-tour-01"
 offer_group_id: "zanzibar-minsk-2026-11-14-7n"
 destination_id: "zanzibar"
-status: "active"
+status: "draft"
 offer_type: "special"
 special_offer_valid_until: "2026-10-30"
 hotel: "RIU Jambo"

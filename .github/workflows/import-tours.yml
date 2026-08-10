@@ -1,46 +1,37 @@
 name: Collect public tour drafts
 
 on:
-  schedule:
-    - cron: '0 */6 * * *'
   workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'
 
 permissions:
   contents: write
-  pull-requests: write
-
-concurrency:
-  group: public-tour-collection
-  cancel-in-progress: false
 
 jobs:
   collect:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v5
-
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
-      - name: Install collector dependencies
-        run: pip install -r requirements-tour-import.txt
-
-      - name: Collect public Telegram posts
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+      - name: Import tours
         run: python scripts/import_tours.py
-
-      - name: Create or update review pull request
-        uses: peter-evans/create-pull-request@v8
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: bot/public-tour-drafts
-          delete-branch: false
-          commit-message: 'chore: collect public tour drafts'
-          title: 'chore: review new public tour drafts'
-          body: |
-            Автоматически собранные карточки отелей из публичных Telegram-каналов.
-
-            Перед публикацией проверьте визу, страну, даты, отель, питание, цену и источник, затем измените `status: draft` на `status: active` у готовых карточек.
-          draft: true
+      - name: Commit imported drafts
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f docs/.vitepress/content/tours/*.md
+          if git diff --cached --quiet; then
+            echo 'No tour draft changes to commit'
+            exit 0
+          fi
+          git commit -m 'chore: collect public tour drafts'
+          git push origin HEAD:main
