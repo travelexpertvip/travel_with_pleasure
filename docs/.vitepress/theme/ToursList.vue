@@ -214,7 +214,7 @@ const formatTourDate = (value: unknown) => {
             {{ formatTourDate(tour.return_date) }}
           </p>
 
-          <p>{{ tour.flight }}</p>
+         <p class="tour-flight">{{ tour.flight }}</p>
 
           <p class="price">
             от {{ tour.price.toLocaleString('ru-RU') }} {{ tour.currency }}
@@ -292,7 +292,7 @@ const formatTourDate = (value: unknown) => {
         {{ formatTourDate(tour.return_date) }}
       </p>
 
-      <p>{{ tour.flight }}</p>
+      <p class="tour-flight">{{ tour.flight }}</p>
 
       <p class="price">
         от {{ tour.price.toLocaleString('ru-RU') }} {{ tour.currency }}
@@ -368,7 +368,7 @@ const formatTourDate = (value: unknown) => {
         {{ formatTourDate(tour.return_date) }}
       </p>
 
-      <p>{{ tour.flight }}</p>
+     <p class="tour-flight">{{ tour.flight }}</p>
 
       <p class="price">
         от {{ tour.price.toLocaleString('ru-RU') }} {{ tour.currency }}
