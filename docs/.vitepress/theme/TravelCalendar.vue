@@ -11,7 +11,25 @@ import {
   type DivingLevel,
   type VisaCode
 } from '../data/destinations'
+const formatTourDate = (value: unknown) => {
+  if (!value) return 'Дата уточняется'
 
+  const raw =
+    value instanceof Date
+      ? value.toISOString().slice(0, 10)
+      : String(value).slice(0, 10)
+
+  const [year, month, day] = raw.split('-')
+
+  if (!year || !month || !day) return 'Дата уточняется'
+
+  return new Intl.DateTimeFormat('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC'
+  }).format(new Date(`${year}-${month}-${day}T00:00:00Z`))
+}
 const { frontmatter } = useData<{
   eyebrow: string
   title: string
@@ -69,9 +87,11 @@ const filteredArchivedTours = computed(() =>
 )
 
 const tourCount = (destinationId: string) =>
-  activeTours.value.filter(tour =>
-    tour.destination_id === destinationId &&
-    Number(tour.departure_date.slice(5, 7)) - 1 === current.value
+  activeTours.value.filter(
+    tour =>
+      tour.destination_id === destinationId &&
+      typeof tour.departure_date === 'string' &&
+      Number(tour.departure_date.slice(5, 7)) - 1 === current.value
   ).length
 
 const openDestination = (
@@ -313,7 +333,7 @@ const rows = computed(() =>
 
       <p>
         ✈ {{ tour.departure_city }} ·
-        {{ tour.departure_date }} — {{ tour.return_date }}
+        {{ formatTourDate(tour.departure_date) }} — {{ formatTourDate(tour.return_date) }}
       </p>
 
       <p>{{ tour.flight }}</p>
@@ -384,7 +404,7 @@ const rows = computed(() =>
 
       <p>
         ✈ {{ tour.departure_city }} ·
-        {{ tour.departure_date }} — {{ tour.return_date }}
+        {{ formatTourDate(tour.departure_date) }} — {{ formatTourDate(tour.return_date) }}
       </p>
 
       <p>{{ tour.flight }}</p>
@@ -485,7 +505,7 @@ const rows = computed(() =>
 
         <p>
           ✈ {{ tour.departure_city }} ·
-          {{ tour.departure_date }} — {{ tour.return_date }}
+         {{ formatTourDate(tour.departure_date) }} — {{ formatTourDate(tour.return_date) }}
         </p>
 
         <p>{{ tour.flight }}</p>
