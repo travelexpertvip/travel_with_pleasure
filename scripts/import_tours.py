@@ -18,6 +18,26 @@ MEAL_PATTERNS = {'UAI': r'ultra\s+all|ультра\s+все', 'AI': r'\ball\b|в
 OFFER_PATTERN = re.compile(r'(?P<hotel>.+?)\s+(?P<stars>[45])\s*\*\s*(?P<meal>UAI|AI|ALL|HB|BB|RO)?\s*[-–—]\s*(?P<price>[\d\s]+)\s*(?P<currency>USD|EUR|BYN|RUB|\$|€|Br)?\s*$', re.I)
 PRICE_LINE = re.compile(r'^\s*[\d\s]+\s*(?:USD|EUR|BYN|RUB|\$|€|Br)\s*$', re.I)
 
+CITY_KEYWORDS = {
+    'Minsk': ('минск', 'minsk'),
+    'Moscow': ('москва', 'moscow', 'мск'),
+    'Istanbul': ('стамбул', 'istanbul'),
+    'Warsaw': ('варшвава', 'warsaw'),
+    'Vilnius': ('вильнюс', 'vilnius'),
+    'Kaunas': ('каунас', 'kaunas'),
+    'Riga': ('рига', 'riga'),
+}
+EXCLUDED_KEYWORDS = {
+    'Egypt': ('египет', 'egypt'),
+    'Turkey': ('турция', 'turkey'),
+    'Bulgaria': ('болгария', 'bulgaria'),
+}
+MEAL_PATTERNS = {
+    'UAI': r'ultra\s+all|ультра\s+все',
+    'AI': r'all\s*inclusive|все\s+включено',
+    'HB': r'\bhb\b|полупансион',
+    'BB': r'\bbb\b|завтрак',
+}
 
 def load_config() -> dict:
     return json.loads(CONFIG_PATH.read_text(encoding='utf-8'))
