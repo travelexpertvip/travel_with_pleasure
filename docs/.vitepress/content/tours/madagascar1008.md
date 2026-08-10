@@ -12,12 +12,13 @@ nights: 6
 departure_city: "Москва"
 departure_date: "2027-04-04"
 return_date: "2027-04-11"
-flight: |-
-  Перелет с багажом (авиакомпания Emirates)
-  2027-04-04 DME-DXB 23:10 - 05:30
-  2027-04-05 DXB-TNR 07:45 - 15:40
-  2027-04-11 TNR-DXB 18:35 - 04:20
-  2027-04-11 TNR-DXB 09:45 - 14:15
+flight: flight: |-
+  ✈️ Перелёт с багажом, Emirates
+
+  4 апреля 2027 — DME → DXB, 23:10–05:30
+  5 апреля 2027 — DXB → TNR, 07:45–15:40
+  11 апреля 2027 — TNR → DXB, 18:35–04:20
+  11 апреля 2027 — DXB → DME, 09:45–14:15
 price: 4999
 currency: "EUR"
 price_for: "на двоих"
