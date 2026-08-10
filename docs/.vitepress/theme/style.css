@@ -266,4 +266,8 @@
     align-items: start;
     flex-direction: column;
   }
+ .tour-card .flight,
+.flight {
+  white-space: pre-line;
+}
 }
