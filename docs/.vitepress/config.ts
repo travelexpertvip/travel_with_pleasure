@@ -9,7 +9,8 @@ export default defineConfig({
     nav: [
       { text: 'Календарь', link: '/' },
       { text: 'Направления', link: '/destinations' },
-      { text: 'Авиабилеты', link: '/flights' }
-    ]
+      { text: 'Авиабилеты', link: '/flights' },
+      { text: 'Туры', link: '/tours' }
+     ]
   }
 })

@@ -69,7 +69,32 @@ const activeTours = computed(() =>
       !isExpiredSpecialOffer(tour)
   )
 )
+const tourMonth = (value: unknown) => {
+  if (!value) return null
 
+  const raw =
+    value instanceof Date
+      ? value.toISOString().slice(0, 10)
+      : String(value)
+
+  const isoMatch = raw.match(/^(\d{4})-(\d{2})-(\d{2})/)
+  if (isoMatch) return Number(isoMatch[2]) - 1
+
+  const ruMatch = raw.match(/^(\d{2})-(\d{2})-(\d{4})$/)
+  if (ruMatch) return Number(ruMatch[2]) - 1
+
+  return null
+}
+
+const currentMonthTours = computed(() =>
+  activeTours.value
+    .filter(tour => tourMonth(tour.departure_date) === current.value)
+    .sort((a, b) =>
+      String(a.departure_date).localeCompare(
+        String(b.departure_date)
+      )
+    )
+)
 const archivedTours = computed(() =>
   tours.filter(
     tour =>
@@ -87,11 +112,8 @@ const filteredArchivedTours = computed(() =>
 )
 
 const tourCount = (destinationId: string) =>
-  activeTours.value.filter(
-    tour =>
-      tour.destination_id === destinationId &&
-      typeof tour.departure_date === 'string' &&
-      Number(tour.departure_date.slice(5, 7)) - 1 === current.value
+  currentMonthTours.value.filter(
+    tour => tour.destination_id === destinationId
   ).length
 
 const openDestination = (
@@ -191,8 +213,8 @@ const shareSelection = async () => {
 const regions = computed(() =>
   [...new Set(destinations.map(x => x.region))].sort()
 )
-const rows = computed(() =>
-  destinations.filter(
+const rows = computed(() => {
+  const filtered = destinations.filter(
     x =>
       x.season.includes(current.value) &&
       JSON.stringify(x).toLowerCase().includes(q.value.toLowerCase()) &&
@@ -200,7 +222,15 @@ const rows = computed(() =>
       (visa.value === 'all' || x.visa === visa.value) &&
       (diving.value === 'all' || x.diving === diving.value)
   )
-)
+
+  return filtered.sort((a, b) => {
+    const tourDifference = tourCount(b.id) - tourCount(a.id)
+
+    if (tourDifference !== 0) return tourDifference
+
+    return a.name.localeCompare(b.name, 'ru')
+  })
+})
 </script>
 
 <template>
