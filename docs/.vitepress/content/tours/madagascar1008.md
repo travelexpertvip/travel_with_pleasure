@@ -14,12 +14,10 @@ departure_date: "2027-04-04"
 return_date: "2027-04-11"
 flight: flight: |-
 Перелёт с багажом, Emirates
-
 4 апреля 2027 — DME → DXB, 23:10–05:30
 5 апреля 2027 — DXB → TNR, 07:45–15:40
 11 апреля 2027 — TNR → DXB, 18:35–04:20
 11 апреля 2027 — DXB → DME, 09:45–14:15
-
 price: 4999
 currency: "EUR"
 price_for: "на двоих"
