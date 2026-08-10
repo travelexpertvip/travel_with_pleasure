@@ -69,9 +69,11 @@ const filteredArchivedTours = computed(() =>
 )
 
 const tourCount = (destinationId: string) =>
-  activeTours.value.filter(tour =>
-    tour.destination_id === destinationId &&
-    Number(tour.departure_date.slice(5, 7)) - 1 === current.value
+  activeTours.value.filter(
+    tour =>
+      tour.destination_id === destinationId &&
+      typeof tour.departure_date === 'string' &&
+      Number(tour.departure_date.slice(5, 7)) - 1 === current.value
   ).length
 
 const openDestination = (
