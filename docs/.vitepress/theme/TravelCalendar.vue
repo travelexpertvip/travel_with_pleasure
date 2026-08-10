@@ -11,7 +11,25 @@ import {
   type DivingLevel,
   type VisaCode
 } from '../data/destinations'
+const formatTourDate = (value: unknown) => {
+  if (!value) return 'Дата уточняется'
 
+  const raw =
+    value instanceof Date
+      ? value.toISOString().slice(0, 10)
+      : String(value).slice(0, 10)
+
+  const [year, month, day] = raw.split('-')
+
+  if (!year || !month || !day) return 'Дата уточняется'
+
+  return new Intl.DateTimeFormat('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC'
+  }).format(new Date(`${year}-${month}-${day}T00:00:00Z`))
+}
 const { frontmatter } = useData<{
   eyebrow: string
   title: string
@@ -45,13 +63,36 @@ const isExpiredSpecialOffer = (tour: typeof tours[number]) =>
   tour.special_offer_valid_until! < localToday()
 
 const activeTours = computed(() =>
-  tours.filter(
-    tour =>
-      tour.status === 'active' &&
-      !isExpiredSpecialOffer(tour)
+  tours
+    .filter(
+      tour =>
+        tour.status === 'active' &&
+        !isExpiredSpecialOffer(tour)
+    )
+    .sort((a, b) => a.price - b.price)
+)
+const tourMonth = (value: unknown) => {
+  if (!value) return null
+
+  const raw =
+    value instanceof Date
+      ? value.toISOString().slice(0, 10)
+      : String(value)
+
+  const isoMatch = raw.match(/^(\d{4})-(\d{2})-(\d{2})/)
+  if (isoMatch) return Number(isoMatch[2]) - 1
+
+  const ruMatch = raw.match(/^(\d{2})-(\d{2})-(\d{4})$/)
+  if (ruMatch) return Number(ruMatch[2]) - 1
+
+  return null
+}
+
+const currentMonthTours = computed(() =>
+  activeTours.value.filter(
+    tour => tourMonth(tour.departure_date) === current.value
   )
 )
-
 const archivedTours = computed(() =>
   tours.filter(
     tour =>
@@ -69,7 +110,9 @@ const filteredArchivedTours = computed(() =>
 )
 
 const tourCount = (destinationId: string) =>
-  activeTours.value.filter(tour => tour.destination_id === destinationId).length
+  currentMonthTours.value.filter(
+    tour => tour.destination_id === destinationId
+  ).length
 
 const openDestination = (
   destination: Destination,
@@ -168,8 +211,8 @@ const shareSelection = async () => {
 const regions = computed(() =>
   [...new Set(destinations.map(x => x.region))].sort()
 )
-const rows = computed(() =>
-  destinations.filter(
+const rows = computed(() => {
+  const filtered = destinations.filter(
     x =>
       x.season.includes(current.value) &&
       JSON.stringify(x).toLowerCase().includes(q.value.toLowerCase()) &&
@@ -177,7 +220,15 @@ const rows = computed(() =>
       (visa.value === 'all' || x.visa === visa.value) &&
       (diving.value === 'all' || x.diving === diving.value)
   )
-)
+
+  return filtered.sort((a, b) => {
+    const tourDifference = tourCount(b.id) - tourCount(a.id)
+
+    if (tourDifference !== 0) return tourDifference
+
+    return a.name.localeCompare(b.name, 'ru')
+  })
+})
 </script>
 
 <template>
@@ -232,7 +283,7 @@ const rows = computed(() =>
     v-for="x in rows"
     :key="x.id"
     class="card"
-    @click="openDestination(x)"
+   @click="openDestination(x, current)"
   >
     <span
       v-if="tourCount(x.id)"
@@ -310,7 +361,7 @@ const rows = computed(() =>
 
       <p>
         ✈ {{ tour.departure_city }} ·
-        {{ tour.departure_date }} — {{ tour.return_date }}
+        {{ formatTourDate(tour.departure_date) }} — {{ formatTourDate(tour.return_date) }}
       </p>
 
       <p>{{ tour.flight }}</p>
@@ -381,7 +432,7 @@ const rows = computed(() =>
 
       <p>
         ✈ {{ tour.departure_city }} ·
-        {{ tour.departure_date }} — {{ tour.return_date }}
+        {{ formatTourDate(tour.departure_date) }} — {{ formatTourDate(tour.return_date) }}
       </p>
 
       <p>{{ tour.flight }}</p>
@@ -482,7 +533,7 @@ const rows = computed(() =>
 
         <p>
           ✈ {{ tour.departure_city }} ·
-          {{ tour.departure_date }} — {{ tour.return_date }}
+         {{ formatTourDate(tour.departure_date) }} — {{ formatTourDate(tour.return_date) }}
         </p>
 
         <p>{{ tour.flight }}</p>

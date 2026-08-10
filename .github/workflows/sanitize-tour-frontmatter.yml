@@ -1,0 +1,62 @@
+name: Sanitize tour frontmatter
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/sanitize-tour-frontmatter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sanitize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+      - name: Quote YAML channel values and fix generator
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          import re
+
+          changed = 0
+          for path in Path('docs/.vitepress/content/tours').glob('*.md'):
+              text = path.read_text(encoding='utf-8')
+              fixed = re.sub(
+                  r'(?m)^source_channel:\s*([^\n\"]+)\s*$',
+                  lambda match: 'source_channel: ' + json.dumps(match.group(1).strip(), ensure_ascii=False),
+                  text,
+              )
+              if fixed != text:
+                  path.write_text(fixed, encoding='utf-8')
+                  changed += 1
+
+          importer = Path('scripts/import_tours.py')
+          text = importer.read_text(encoding='utf-8')
+          fixed = text.replace(
+              'f\"source_channel: @{post[\'channel\']}\"',
+              'f\"source_channel: {yaml_value(\'@\' + post[\'channel\'])}\"',
+          )
+          if fixed != text:
+              importer.write_text(fixed, encoding='utf-8')
+              changed += 1
+
+          if not changed:
+              print('No changes needed')
+          PY
+      - name: Commit sanitized tour files
+        run: |
+          if git diff --quiet; then
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/.vitepress/content/tours scripts/import_tours.py
+          git commit -m 'fix: quote generated tour YAML values'
+          git push
