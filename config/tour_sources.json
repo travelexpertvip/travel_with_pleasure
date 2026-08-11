@@ -3,7 +3,7 @@
   "passport_country": "BY",
   "departure_cities": ["Minsk", "Moscow", "Istanbul", "Warsaw", "Vilnius", "Kaunas","Riga"],
   "excluded_countries": ["Egypt", "Turkey", "Bulgaria"],
-  "nights": { "min": 5, "max": 10 },
+  "nights": { "min": 5, "max": 15 },
   "hotel_stars": [4, 5],
   "meal_plans": ["AI", "UAI", "BB", "HB"],
   "budget_eur_for_two": { "AI": 6000, "UAI": 6000, "BB": 4000, "HB": 4000 },
@@ -19,6 +19,9 @@
     "indonesia": ["индонез", "бали", "indonesia", "bali"],
     "cuba": ["куба", "cuba"],
     "dominican-republic": ["доминикан", "dominican"],
-    "mexico": ["мексик", "mexico"]
+    "mexico": ["мексик", "mexico"],
+    "bali": ["бали", "bali"],
+    "italy": ["италия", "italy"],
+    "seychelles": ["сейшелы", "seychelles"],
   }
 }
