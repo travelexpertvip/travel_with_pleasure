@@ -2,7 +2,7 @@
 id: "anywaytravelminsk-6798-1"
 offer_group_id: "anywaytravelminsk-6798"
 destination_id: "uae"
-status: active
+status: draft
 offer_type: special
 hotel: "Intercontinental Ras Al Khaimah Mina Al Arab Resort & Spa"
 hotel_url: https://www.ihg.com/intercontinental/hotels/us/en/ras-al-khaimah/rktha/hoteldetail
