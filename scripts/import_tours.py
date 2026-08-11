@@ -199,36 +199,76 @@ def extract_offers(post: dict, config: dict) -> list[dict]:
     return offers or ([make_flexible_offer(post, city, nights, departure, destination, valid_until)] if make_flexible_offer(post, city, nights, departure, destination, valid_until) else [])
 
 
-def write_offer(offer: dict, config: dict) -> Path:
+def write_offer(offer: dict, config: dict) -> Path | None:
     output_dir = ROOT / config['output_directory']
     output_dir.mkdir(parents=True, exist_ok=True)
     post = offer['post']
     filename = output_dir / f"{offer['id']}.md"
+
     if filename.exists():
-    print(f"SKIP existing tour: {filename.name}")
-    return filename
+        print(f"SKIP existing tour: {filename.name}")
+        return None
+
     raw_hash = hashlib.sha256(post['text'].encode('utf-8')).hexdigest()[:12]
-    lines = ['---', f"id: {yaml_value(offer['id'])}", f"offer_group_id: {yaml_value(offer['offer_group_id'])}", f"destination_id: {yaml_value(offer['destination_id'])}", 'status: draft', f"offer_type: {offer['offer_type']}", f"hotel: {yaml_value(offer['hotel'])}", f"stars: {offer['stars']}", f"meal_plan: {yaml_value(offer['meal_plan'])}", f"nights: {offer['nights']}", f"departure_city: {yaml_value(offer['departure_city'])}", f"departure_date: {offer['departure_date']}", f"return_date: {offer['return_date']}", 'flight: Не указан', f"price: {offer['price']}", f"currency: {offer['currency']}", f"price_for: {offer['price_for']}", f"price_note: {yaml_value(offer['price_note'])}", f"published_at: {post['published_at']}", f"tour_source_url: {post['url']}", f"price_checked_at: {datetime.now(timezone.utc).isoformat()}", f"source_channel: @{post['channel']}", 'passport_country: BY', 'visa_check: manual_review_required', f"source_content_hash: {raw_hash}"]
+    lines = [
+        '---',
+        f"id: {yaml_value(offer['id'])}",
+        f"offer_group_id: {yaml_value(offer['offer_group_id'])}",
+        f"destination_id: {yaml_value(offer['destination_id'])}",
+        'status: draft',
+        f"offer_type: {offer['offer_type']}",
+        f"hotel: {yaml_value(offer['hotel'])}",
+        f"stars: {offer['stars']}",
+        f"meal_plan: {yaml_value(offer['meal_plan'])}",
+        f"nights: {offer['nights']}",
+        f"departure_city: {yaml_value(offer['departure_city'])}",
+        f"departure_date: {offer['departure_date']}",
+        f"return_date: {offer['return_date']}",
+        'flight: Не указан',
+        f"price: {offer['price']}",
+        f"currency: {offer['currency']}",
+        f"price_for: {offer['price_for']}",
+        f"price_note: {yaml_value(offer['price_note'])}",
+        f"published_at: {post['published_at']}",
+        f"tour_source_url: {post['url']}",
+        f"price_checked_at: {datetime.now(timezone.utc).isoformat()}",
+        f"source_channel: @{post['channel']}",
+        'passport_country: BY',
+        'visa_check: manual_review_required',
+        f"source_content_hash: {raw_hash}",
+    ]
     if offer['special_offer_valid_until']:
         lines.append(f"special_offer_valid_until: {offer['special_offer_valid_until']}")
-    lines.extend(['---', '', '## Исходное предложение', '', post['text'], '', '## Проверка перед публикацией', '', '- [ ] Подтвердить условия въезда для паспорта Беларуси', '- [ ] Проверить цену за двоих и условия пакета', '- [ ] Сменить `status: draft` на `status: active` для публикации'])
+
+    lines.extend([
+        '---', '', '## Исходное предложение', '', post['text'], '',
+        '## Проверка перед публикацией', '',
+        '- [ ] Подтвердить условия въезда для паспорта Беларуси',
+        '- [ ] Проверить цену за двоих и условия пакета',
+        '- [ ] Сменить `status: draft` на `status: active` для публикации',
+    ])
     filename.write_text('\n'.join(lines) + '\n', encoding='utf-8')
     return filename
-
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument('--max-posts-per-channel', type=int, default=30)
     args = parser.parse_args()
     config, written = load_config(), []
+
     for channel in config['channels']:
         try:
             posts = fetch_posts(channel)[:args.max_posts_per_channel]
         except requests.RequestException as error:
             print(f'WARNING: @{channel}: {error}')
             continue
+
         for post in posts:
-            written.extend(write_offer(offer, config) for offer in extract_offers(post, config))
+            for offer in extract_offers(post, config):
+                filename = write_offer(offer, config)
+                if filename:
+                    written.append(filename)
+
     print(f'Created or updated {len(written)} hotel offer drafts')
     return 0
 
