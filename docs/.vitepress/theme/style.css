@@ -274,4 +274,37 @@
   white-space: pre-line;
   line-height: 1.55;
 }
+ @media (max-width: 768px) {
+  /* Не используем неработающую кнопку мобильного меню */
+  .VPNavBarHamburger {
+    display: none !important;
+  }
+
+  /* Показываем стандартные ссылки VitePress как прокручиваемую строку */
+  .VPNavBar .VPNavBarMenu {
+    display: flex !important;
+    position: fixed;
+    top: var(--vp-nav-height);
+    left: 0;
+    right: 0;
+    z-index: 100;
+    gap: 4px;
+    overflow-x: auto;
+    padding: 8px 12px;
+    background: #061b2b;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .VPNavBar .VPNavBarMenuLink {
+    flex: 0 0 auto;
+    padding: 8px 10px;
+  }
+
+  .VPContent {
+    padding-top: 52px;
+  }
+}
 }
