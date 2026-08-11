@@ -17,9 +17,9 @@ currency: USD
 price_for: unknown
 price_note: "Варианты стоимости: AL - 7280$ на двоих!"
 published_at: 2026-08-10T17:51:09+00:00
-tour_source_url: https://t.me/Anywaytravelminsk/6805
+tour_source_url: "https://t.me/Anywaytravelminsk/6805"
 price_checked_at: 2026-08-11T08:17:08.366600+00:00
-source_channel: @Anywaytravelminsk
+source_channel: "@Anywaytravelminsk"
 passport_country: BY
 visa_check: manual_review_required
 source_content_hash: 97cb43472486

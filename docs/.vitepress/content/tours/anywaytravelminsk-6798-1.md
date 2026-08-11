@@ -17,9 +17,9 @@ currency: USD
 price_for: на двоих
 price_note: "на двоих"
 published_at: 2026-08-10T09:37:07+00:00
-tour_source_url: https://t.me/Anywaytravelminsk/6798
+tour_source_url: "https://t.me/Anywaytravelminsk/6798"
 price_checked_at: 2026-08-11T08:17:08.364735+00:00
-source_channel: @Anywaytravelminsk
+source_channel: "@Anywaytravelminsk"
 passport_country: BY
 visa_check: manual_review_required
 source_content_hash: 18e026dcebbf
