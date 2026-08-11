@@ -6,11 +6,17 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: tour-content-write
+  cancel-in-progress: false
+
 jobs:
   normalize:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -26,4 +32,5 @@ jobs:
             exit 0
           fi
           git commit -m 'fix: normalize tour YAML'
-          git push
+          git pull --rebase origin main
+          git push origin HEAD:main
