@@ -14,12 +14,12 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / 'config' / 'tour_sources.json'
 CITY_KEYWORDS = {
     'Minsk': ('минск', 'minsk'),
-    'Moscow': ('москва', 'moscow', 'мск'),
+    'Moscow': ('москва', 'москвы', 'moscow', 'мск'),
     'Istanbul': ('стамбул', 'istanbul'),
-    'Warsaw': ('варшава', 'warsaw'),
+    'Warsaw': ('варшав', 'warsaw'),
     'Vilnius': ('вильнюс', 'vilnius'),
     'Kaunas': ('каунас', 'kaunas'),
-    'Riga': ('рига', 'riga'),
+    'Riga': ('риг', 'riga'),
 }
 EXCLUDED_KEYWORDS = {
     'Egypt': ('египет', 'egypt'),
