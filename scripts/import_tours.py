@@ -204,6 +204,9 @@ def write_offer(offer: dict, config: dict) -> Path:
     output_dir.mkdir(parents=True, exist_ok=True)
     post = offer['post']
     filename = output_dir / f"{offer['id']}.md"
+    if filename.exists():
+    print(f"SKIP existing tour: {filename.name}")
+    return filename
     raw_hash = hashlib.sha256(post['text'].encode('utf-8')).hexdigest()[:12]
     lines = ['---', f"id: {yaml_value(offer['id'])}", f"offer_group_id: {yaml_value(offer['offer_group_id'])}", f"destination_id: {yaml_value(offer['destination_id'])}", 'status: draft', f"offer_type: {offer['offer_type']}", f"hotel: {yaml_value(offer['hotel'])}", f"stars: {offer['stars']}", f"meal_plan: {yaml_value(offer['meal_plan'])}", f"nights: {offer['nights']}", f"departure_city: {yaml_value(offer['departure_city'])}", f"departure_date: {offer['departure_date']}", f"return_date: {offer['return_date']}", 'flight: Не указан', f"price: {offer['price']}", f"currency: {offer['currency']}", f"price_for: {offer['price_for']}", f"price_note: {yaml_value(offer['price_note'])}", f"published_at: {post['published_at']}", f"tour_source_url: {post['url']}", f"price_checked_at: {datetime.now(timezone.utc).isoformat()}", f"source_channel: @{post['channel']}", 'passport_country: BY', 'visa_check: manual_review_required', f"source_content_hash: {raw_hash}"]
     if offer['special_offer_valid_until']:
