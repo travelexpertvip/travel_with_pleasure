@@ -9,19 +9,18 @@
   "budget_eur_for_two": { "AI": 6000, "UAI": 6000, "BB": 4000, "HB": 4000 },
   "output_directory": "docs/.vitepress/content/tours",
   "destinations": {
-    "maldives": ["мальдив", "maldives"],
-    "thailand": ["таиланд", "тайланд", "thailand"],
-    "vietnam": ["вьетнам", "vietnam"],
-    "uae": ["оаэ", "emirates", "dubai", "дубай", "рас-эль-хайма", "рас эль хайма", "ras al khaimah", "ras-al-khaimah"],
-    "seychelles": ["сейшел", "seychelles"],
-    "zanzibar": ["занзибар", "zanzibar"],
-    "mauritius": ["маврикий", "mauritius"],
-    "cuba": ["куба", "cuba"],
-    "dominican-republic": ["доминикан", "dominican"],
-    "mexico": ["мексик", "mexico"],
-    "Indonesia": ["индонезия", "indonesia", "бали", "bali", "нуса дуа", "nusa dua", "семиньяк", "seminyak", "убуд", "ubud"],
-    "Italy": ["италия", "italy", "сицилия", "sicily", "милан", "milan"],
-    "China": ["китай", "china", "пекин", "beijing", "шанхай", "shanghai", "сиань", "xian", "чжанцзяцзе", "zhangjiajie"],
-    "seychelles": ["сейшелы", "seychelles"]
-  }
+  "maldives": ["мальдив", "maldives"],
+  "thailand": ["таиланд", "тайланд", "thailand"],
+  "vietnam": ["вьетнам", "vietnam"],
+  "uae": ["оаэ", "emirates", "dubai", "дубай", "рас-эль-хайма", "рас эль хайма", "ras al khaimah", "ras-al-khaimah"],
+  "seychelles": ["сейшел", "сейшелы", "seychelles"],
+  "zanzibar": ["занзибар", "zanzibar"],
+  "mauritius": ["маврикий", "mauritius"],
+  "indonesia": ["индонез", "бали", "indonesia", "bali", "нуса дуа", "nusa dua", "семиньяк", "seminyak", "убуд", "ubud"],
+  "cuba": ["куба", "cuba"],
+  "dominican-republic": ["доминикан", "dominican"],
+  "mexico": ["мексик", "mexico"],
+  "italy": ["италия", "italy", "сицилия", "sicily", "милан", "milan"],
+  "china": ["китай", "china", "пекин", "beijing", "шанхай", "shanghai", "сиань", "xian", "чжанцзяцзе", "zhangjiajie"]
+}
 }
