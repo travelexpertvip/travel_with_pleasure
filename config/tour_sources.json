@@ -20,8 +20,9 @@
     "cuba": ["куба", "cuba"],
     "dominican-republic": ["доминикан", "dominican"],
     "mexico": ["мексик", "mexico"],
-    "bali": ["бали", "bali"],
-    "italy": ["италия", "italy"],
+    "Indonesia": ["индонезия", "indonesia", "бали", "bali", "нуса дуа", "nusa dua", "семиньяк", "seminyak", "убуд", "ubud"],
+    "Italy": ["италия", "italy", "сицилия", "sicily", "милан", "milan"],
+    "China": ["китай", "china", "пекин", "beijing", "шанхай", "shanghai", "сиань", "xian", "чжанцзяцзе", "zhangjiajie"],
     "seychelles": ["сейшелы", "seychelles"],
   }
 }
