@@ -18,7 +18,7 @@ price_for: unknown
 price_note: "Варианты стоимости: 2 взрослых - 2948$; 2 взрослых и ребенок - 3560$; 2 взрослых и 2 детей  - 4389$"
 published_at: 2026-08-10T09:37:07+00:00
 tour_source_url: "https://t.me/Anywaytravelminsk/6798"
-price_checked_at: 2026-08-11T12:52:10.332146+00:00
+price_checked_at: 2026-08-11T14:26:33.300033+00:00
 source_channel: "@Anywaytravelminsk"
 passport_country: BY
 visa_check: manual_review_required
