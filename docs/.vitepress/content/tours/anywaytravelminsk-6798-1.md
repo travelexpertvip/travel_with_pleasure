@@ -2,20 +2,22 @@
 id: "anywaytravelminsk-6798-1"
 offer_group_id: "anywaytravelminsk-6798"
 destination_id: "uae"
-status: draft
+status: active
 offer_type: special
 hotel: "Intercontinental Ras Al Khaimah Mina Al Arab Resort & Spa"
+hotel_url: https://www.ihg.com/intercontinental/hotels/us/en/ras-al-khaimah/rktha/hoteldetail
 stars: 5
-meal_plan: "Не указано"
+meal_plan: "BB"
 nights: 7
 departure_city: "Minsk"
 departure_date: 2026-10-06
 return_date: 2026-10-13
-flight: Не указан
+flight: Fly dubai с багажом
 price: 2948
 currency: USD
-price_for: unknown
-price_note: "Варианты стоимости: 2 взрослых - 2948$; 2 взрослых и ребенок - 3560$; 2 взрослых и 2 детей  - 4389$"
+price_for: на двоих
+price_note: "❤️‍🔥 Акция действительная при бронировании до 19 августа
+🍊 Период вашего отдыха с 25 августа по 23 октября"
 published_at: 2026-08-10T09:37:07+00:00
 tour_source_url: "https://t.me/Anywaytravelminsk/6798"
 price_checked_at: 2026-08-11T14:26:33.300033+00:00
