@@ -14,12 +14,12 @@ return_date: 2026-10-13
 flight: Не указан
 price: 2948
 currency: USD
-price_for: на двоих
-price_note: "на двоих"
+price_for: unknown
+price_note: "Варианты стоимости: 2 взрослых - 2948$; 2 взрослых и ребенок - 3560$; 2 взрослых и 2 детей  - 4389$"
 published_at: 2026-08-10T09:37:07+00:00
-tour_source_url: "https://t.me/Anywaytravelminsk/6798"
-price_checked_at: 2026-08-11T08:17:08.364735+00:00
-source_channel: "@Anywaytravelminsk"
+tour_source_url: https://t.me/Anywaytravelminsk/6798
+price_checked_at: 2026-08-11T11:32:58.783865+00:00
+source_channel: @Anywaytravelminsk
 passport_country: BY
 visa_check: manual_review_required
 source_content_hash: 18e026dcebbf
