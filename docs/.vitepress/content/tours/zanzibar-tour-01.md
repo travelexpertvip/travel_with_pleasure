@@ -18,7 +18,7 @@ price: 1500
 currency: "USD"
 price_note: "Цена за человека при двухместном размещении"
 published_at: "2026-08-08"
-tour_source_url: "\"VIP_tours_tg\""
+tour_source_url: "\"\\\"VIP_tours_tg\\\"\""
 price_checked_at: "2026-08-08"
 ---
 
