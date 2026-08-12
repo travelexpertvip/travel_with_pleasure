@@ -19,9 +19,9 @@ price_for: на двоих
 price_note: "❤️‍🔥 Акция действительная при бронировании до 19 августа
 🍊 Период вашего отдыха с 25 августа по 23 октября"
 published_at: 2026-08-10T09:37:07+00:00
-tour_source_url: "https://t.me/Anywaytravelminsk/6798"
+tour_source_url: "\"https://t.me/Anywaytravelminsk/6798\""
 price_checked_at: 2026-08-11T14:26:33.300033+00:00
-source_channel: "@Anywaytravelminsk"
+source_channel: "\"@Anywaytravelminsk\""
 passport_country: BY
 visa_check: manual_review_required
 source_content_hash: 18e026dcebbf
